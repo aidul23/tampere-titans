@@ -7,6 +7,7 @@ import Footer from "./components/Footer";
 import "./index.css";
 import AboutPage from "./pages/AboutPage";
 import Navbar from "./components/Navbar";
+import JoinUs from "./pages/JoinUs";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Navbar/>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/join" element={<JoinUs />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/players" element={<Players />} />
         <Route path="/tournaments" element={<Tournaments />} />
