@@ -27,7 +27,7 @@ const Players = () => {
       <div className="container mx-auto grid gap-12">
         {/* Goalkeepers Section */}
         <div>
-          <h2 className="text-3xl font-semibold text-accent mb-6 text-center">🧤 Goalkeepers</h2>
+          <h2 className="text-3xl text-accent mb-6 text-center">Goalkeepers</h2>
           <div className="flex flex-wrap justify-center gap-6">
             {filterPlayersByPosition("Goalkeeper").map((player, index) => (
               <PlayerCard key={index} player={player} />
@@ -37,7 +37,7 @@ const Players = () => {
 
         {/* Defenders Section */}
         <div>
-          <h2 className="text-3xl font-semibold text-accent mb-6 text-center">🛡 Defenders</h2>
+          <h2 className="text-3xl text-accent mb-6 text-center">Defenders</h2>
           <div className="flex flex-wrap justify-center gap-6">
             {filterPlayersByPosition("Defender").map((player, index) => (
               <PlayerCard key={index} player={player} />
@@ -47,7 +47,7 @@ const Players = () => {
 
         {/* Midfielders Section */}
         <div>
-          <h2 className="text-3xl font-semibold text-accent mb-6 text-center">🎯 Midfielders</h2>
+          <h2 className="text-3xl text-accent mb-6 text-center">Midfielders</h2>
           <div className="flex flex-wrap justify-center gap-6">
             {filterPlayersByPosition("Midfielder").map((player, index) => (
               <PlayerCard key={index} player={player} />
@@ -57,7 +57,7 @@ const Players = () => {
 
         {/* Forwards Section */}
         <div>
-          <h2 className="text-3xl font-semibold text-accent mb-6 text-center">⚡ Forwards</h2>
+          <h2 className="text-3xl text-accent mb-6 text-center">Forwards</h2>
           <div className="flex flex-wrap justify-center gap-6">
             {filterPlayersByPosition("Forward").map((player, index) => (
               <PlayerCard key={index} player={player} />
@@ -68,17 +68,6 @@ const Players = () => {
     </div>
   );
 };
-
-// Player Card Component
-// const PlayerCard = ({ player }) => {
-//   return (
-//     <div className="bg-white text-black p-2 rounded-xl shadow-lg w-auto text-center transform hover:scale-105 transition">
-//       <img src={player.image} alt={player.name} className="w-full h-60 object-contain rounded-lg mb-3" />
-//       <h3 className="text-lg font-semibold">{player.name}</h3>
-//       <p className="text-sm text-gray-600">{player.position}</p>
-//     </div>
-//   );
-// };
 
 const PlayerCard = ({ player }) => {
   return (
@@ -112,8 +101,8 @@ const PlayerCard = ({ player }) => {
 
         {/* Extra Info - Appears When Hovering Over the Entire Card */}
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 pt-2 text-right">
-          <p className="text-base text-gray-300">Joined: {player.joiningDate}</p>
-          <p className="text-base text-accent font-semibold">⚡ {player.position}</p>
+          <p className="text-base text-gray-300">Season {player.joiningDate}</p>
+          <p className="text-base text-accent font-semibold">{player.position}</p>
         </div>
       </div>
     </div>

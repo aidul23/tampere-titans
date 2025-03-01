@@ -8,6 +8,7 @@ import "./index.css";
 import AboutPage from "./pages/AboutPage";
 import Navbar from "./components/Navbar";
 import JoinUs from "./pages/JoinUs";
+import TournamentDetails from "./pages/TournamentDetails";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/about" element={<AboutPage />} />
         <Route path="/players" element={<Players />} />
         <Route path="/tournaments" element={<Tournaments />} />
+        <Route path="/tournament/:id" element={<TournamentDetails />} />
       </Routes>
       <Footer />
     </Router>
