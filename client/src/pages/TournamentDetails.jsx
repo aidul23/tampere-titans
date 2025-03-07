@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import MatchCard from "../components/MatchCard"
 
 const tournamentData = {
     "2024": {
@@ -21,6 +22,26 @@ const tournamentData = {
             { date: "July 15", time: "16:00", venue: "Tampere Stadium", team1: "Sylhet Stallions", team2: "Khulna Knights" },
             { date: "July 16", time: "18:00", venue: "Tampere Stadium", team1: "Rajshahi Renegades", team2: "Chattogram Cobras" },
             { date: "July 17", time: "20:00", venue: "Tampere Stadium", team1: "Barishal Blasters", team2: "Dhaka Dragons" },
+        ],
+        playerStats: [
+            { name: "John Doe", team: "Sylhet Stallions", goals: 5, assists: 3, matches: 4 },
+            { name: "Jane Smith", team: "Khulna Knights", goals: 3, assists: 4, matches: 5 },
+            { name: "Ali Khan", team: "Rajshahi Renegades", goals: 4, assists: 2, matches: 3 },
+        ],
+        matches: [
+            {
+                date: "August 31, 2024",
+                time: "09:30",
+                team1: { name: "Sylhet Stallions", flag: "/assets/flags/nepal.png", score: 4, scorer: ["John Doe", "John Doe", "John Doe", "John Doe"] },
+                team2: { name: "Khulna Knights", flag: "/assets/flags/india.png", score: 1, scorer: ["John Doe",] },
+                status: "Finished",
+                venue: "Kaukajärven Kenttä",
+                stats: {
+                    yellowCards: [1, 1],
+                    redCards: [0, 0],
+                },
+                manOfTheMatch: "John Doe",
+            },
         ],
     },
     "2023": {
@@ -181,8 +202,41 @@ const TournamentDetails = () => {
                         </table>
                     </div>
                 )}
-                {activeTab === "matches" && <p className="text-lg text-gray-800">📅 Matches will be added soon...</p>}
-                {activeTab === "stats" && <p className="text-lg text-gray-800">📊 Player stats and performance analysis coming soon!</p>}
+                {activeTab === "matches" && (
+                    <div className="mt-6">
+                        <h2 className="text-2xl font-semibold mb-4">Match Results</h2>
+                        {tournament.matches.map((match, index) => (
+                            <MatchCard key={index} match={match} />
+                        ))}
+                    </div>
+                )}
+                {activeTab === "stats" && (
+                    <div className="mt-6">
+                        <h2 className="text-2xl font-semibold mb-4">Player Statistics</h2>
+                        <table className="w-full border-collapse bg-white shadow-lg rounded-lg overflow-hidden">
+                            <thead>
+                                <tr className="bg-primary text-white">
+                                    <th className="py-2 px-4">Player</th>
+                                    <th className="py-2 px-4">Team</th>
+                                    <th className="py-2 px-4">Goals</th>
+                                    <th className="py-2 px-4">Assists</th>
+                                    <th className="py-2 px-4">Matches</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {tournament.playerStats.map((player, index) => (
+                                    <tr key={index} className="text-center border-b">
+                                        <td className="py-2 px-4">{player.name}</td>
+                                        <td className="py-2 px-4">{player.team}</td>
+                                        <td className="py-2 px-4">{player.goals}</td>
+                                        <td className="py-2 px-4">{player.assists}</td>
+                                        <td className="py-2 px-4">{player.matches}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
             </div>
 
         </div >
