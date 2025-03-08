@@ -80,16 +80,6 @@ const PlayerCard = ({ player }) => {
       {/* Overlay for Hover Effect */}
       <div className="absolute inset-0 flex flex-col justify-end p-4 
         bg-gradient-to-t from-black/90 to-transparent transition-all duration-300 group-hover:pb-8">
-        
-        {/* Jersey Number (Forced Down) */}
-        {/* <h2 className="text-5xl font-bold text-white relative top-8 transition-all duration-300 transform group-hover:-translate-y-2">
-          10
-        </h2> */}
-
-        {/* Player Name (Forced Down) */}
-        {/* <h3 className="text-lg font-bold text-white relative top-7 transition-all duration-300 transform group-hover:-translate-y-2">
-          {player.name}
-        </h3> */}
 
         {/* Player Info (Name & Jersey Number Always Visible) */}
         <div className="space-y-1 relative top-4 transition-all duration-300 transform group-hover:-translate-y-2">
@@ -101,7 +91,7 @@ const PlayerCard = ({ player }) => {
 
         {/* Extra Info - Appears When Hovering Over the Entire Card */}
         <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-150 pt-2 text-right">
-          <p className="text-base text-gray-300">Season {player.joiningDate}</p>
+          <p className="text-base text-gray-300">Joined {player.joiningDate}</p>
           <p className="text-base text-accent font-semibold">{player.position}</p>
         </div>
       </div>

@@ -9,4 +9,19 @@ body {
 
 * {
   user-select: none;
+  margin:0 ;
+  padding:0 ;
+}
+
+.my-masonry-grid {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -10px;
+  margin-right: -10px;
+}
+
+.my-masonry-grid_column {
+  padding-left: 10px;
+  padding-right: 10px;
+  background-clip: padding-box;
 }

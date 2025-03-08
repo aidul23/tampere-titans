@@ -36,6 +36,7 @@ const Navbar = () => {
           <NavLink to="/about">About</NavLink>
           <NavLink to="/players">Players</NavLink>
           <NavLink to="/tournaments">Tournaments</NavLink>
+          <NavLink to="/activities">Activity</NavLink>
         </div>
 
         {/* Mobile Menu Button */}
