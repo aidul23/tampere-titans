@@ -113,4 +113,13 @@ const updatePlayer = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerPlayer, approvePlayer, getAllPlayers, deletePlayer, updatePlayer }
+const getApprovedPlayers = asyncHandler(async (req, res) => {
+  try {
+    const approvedPlayers = await Player.find({ isApproved: true }); // Fetch only approved players
+    res.status(200).json({ players: approvedPlayers });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching approved players", error });
+  }
+});
+
+module.exports = { registerPlayer, approvePlayer, getAllPlayers, deletePlayer, updatePlayer, getApprovedPlayers }

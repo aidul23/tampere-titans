@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const { registerPlayer, approvePlayer, getAllPlayers, deletePlayer, updatePlayer } = require("../controllers/player.controller")
+const { registerPlayer, approvePlayer, getAllPlayers, deletePlayer, updatePlayer, getApprovedPlayers } = require("../controllers/player.controller")
 const { upload } = require("../middlewares/multer.middleware");
 
 const router = Router();
@@ -21,5 +21,7 @@ router.route("/:id/approve").put(approvePlayer);
 router.route("/:id").delete(deletePlayer);
 
 router.route("/:id").put(updatePlayer);
+
+router.route("/approved").get(getApprovedPlayers);
 
 module.exports = router;

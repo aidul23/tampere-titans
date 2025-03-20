@@ -8,11 +8,11 @@ const MatchCard = ({ match }) => {
             </div>
 
             {/* Teams vs Teams */}
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between">
                 {/* Team 1 */}
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-end">
                     <div className="flex items-center">
-                        <img src={match.team1.flag} alt={match.team1.name} className="w-8 h-8 mr-2 rounded-lg" />
+                        <img src="https://scontent-hel3-1.xx.fbcdn.net/v/t39.30808-6/475975621_475717385592111_8601467123491728576_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_ohc=EbDu59wtmikQ7kNvgEaPQS1&_nc_oc=AdnvuGuCUgRjP8QDgFcfDYMa6MwVUuXUd-nmyfcud2CUrnpZQM-UC4kgTH9w18pb8sA&_nc_zt=23&_nc_ht=scontent-hel3-1.xx&_nc_gid=Q5yeMYahOdtdYMhlh088yA&oh=00_AYHM8oYOS67L_a1hYTXaYbGRmqqplpHbYKC-EcyCQp2xPg&oe=67E26DC5" alt={match.team1.name} className="w-8 h-8 mr-2 rounded-full" />
                         <span className="text-lg font-bold">{match.team1.name}</span>
                     </div>
                     {/* Goal Scorers */}
@@ -27,10 +27,10 @@ const MatchCard = ({ match }) => {
                 <span className="text-2xl font-bold">{match.team1.score} - {match.team2.score}</span>
 
                 {/* Team 2 */}
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col">
                     <div className="flex items-center">
                         <span className="text-lg font-bold">{match.team2.name}</span>
-                        <img src={match.team2.flag} alt={match.team2.name} className="w-8 h-8 ml-2 rounded-lg" />
+                        <img src="https://scontent-hel3-1.xx.fbcdn.net/v/t39.30808-6/475843082_475717125592137_4438689105334184381_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_ohc=J566UYs7IIAQ7kNvgGwZ8ka&_nc_oc=Adk_-_JvArBT_o5UKZ3rou1MQBhm4OUMhrbIuvuMcanKWDIY1vGzRhoSgN601a6Mh5k&_nc_zt=23&_nc_ht=scontent-hel3-1.xx&_nc_gid=qXm_TJKpZFCTbjS30P7KsQ&oh=00_AYGK0MNAMoIZX5CwZySnqcQGXYEfZxqIPBicY0TsD0QheA&oe=67E291DF" alt={match.team2.name} className="w-8 h-8 ml-2 rounded-full" />
                     </div>
                     {/* Goal Scorers */}
                     <ul className="text-sm text-gray-600 mt-1">

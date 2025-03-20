@@ -75,6 +75,7 @@ function AdminDashboard() {
       {error && <p className="text-red-500 text-center">{error}</p>}
       <div>
         <Link to="/create-tournament" className="bg-green-500 text-white px-4 py-2 rounded">➕ Create Tournament</Link>
+        <Link to="/post" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Acitivity</Link>
       </div>
 
       <h2 className="text-2xl font-bold mb-4 mt-6">Player Lists</h2>
