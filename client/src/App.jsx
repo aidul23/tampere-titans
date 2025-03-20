@@ -14,6 +14,7 @@ import AdminLogin from "./pages/AdminLogin";
 import CreateTournament from "./pages/CreateTournament"
 import Activity from "./pages/Activity";
 import ErrorBoundary from "./components/ErrorBoundary";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
@@ -39,6 +40,16 @@ function App() {
         />
       </Routes>
       <Footer />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover />
     </Router>
   );
 }

@@ -19,10 +19,10 @@ const HomePage = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      <h1 className="text-6xl font-extrabold text-light shadow-lg">
+      <h1 className="text-6xl font-extrabold text-light">
         Welcome to Tampere Titans
       </h1>
-      <p className="mt-4 text-xl text-secondary font-medium shadow-md">
+      <p className="mt-4 text-xl text-secondary font-medium">
         Power, Passion, Football.
       </p>
       <button onClick={() => navigate("/join")} className="mt-6 px-6 py-3 bg-secondary text-black rounded-lg text-lg font-semibold hover:bg-accent hover:shadow-xl transition transform hover:scale-105">

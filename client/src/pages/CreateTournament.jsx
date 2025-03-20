@@ -50,7 +50,7 @@ const CreateTournament = () => {
     };
 
     return (
-        <div className="max-w-lg mx-auto m-24 p-6 bg-white shadow-lg rounded-lg">
+        <div className="max-w-lg mx-auto mt-24 mb-24 p-8 bg-white shadow-lg rounded-lg">
             <h2 className="text-2xl font-bold text-center">Create Tournament</h2>
 
             <form onSubmit={handleSubmit} className="mt-4 space-y-4">

@@ -1,4 +1,7 @@
 import { useState } from "react";
+import axios from "axios";
+import { toast } from "react-toastify"; // Import toastify
+import "react-toastify/dist/ReactToastify.css"; // Import toast styles
 
 const JoinUs = () => {
   const [formData, setFormData] = useState({
@@ -10,7 +13,9 @@ const JoinUs = () => {
     position: "",
   });
 
-  const [error, setError] = useState(""); // Error message state
+  // Error and success state (No longer needed, as we're using toast)
+  // const [error, setError] = useState("");
+  // const [success, setSuccess] = useState("");
 
   // Handle input changes
   const handleChange = (e) => {
@@ -37,26 +42,57 @@ const JoinUs = () => {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const age = calculateAge(formData.dob);
     if (age < 18) {
-      setError("You must be at least 18 years old to join the team.");
+      toast.error("You must be at least 18 years old to join the team."); // Show error toast
       return;
     }
 
-    setError(""); // Clear error if valid
-    console.log("Form Submitted:", formData);
-    alert("Application Submitted Successfully! ✅");
+    // Clear any previous error
+    toast.dismiss();
+
+    const form = new FormData();
+    form.append("name", formData.name);
+    form.append("dob", formData.dob);
+    form.append("email", formData.email);
+    form.append("phone", formData.phone);
+    form.append("position", formData.position);
+    form.append("image", formData.image);
+
+    try {
+      // Send form data to the backend via a POST request
+      const response = await axios.post("http://localhost:8000/api/v1/players/register", form, {
+        headers: {
+          "Content-Type": "multipart/form-data", // This tells the server that we are sending form data with a file
+        },
+      });
+
+      if (response.status === 201) {
+        toast.success("Your application was submitted successfully! Now wait for the approval"); // Show success toast
+        setFormData({
+          name: "",
+          dob: "",
+          email: "",
+          phone: "",
+          image: null,
+          position: "",
+        });
+      }
+    } catch (error) {
+      toast.error(error.response?.data?.message || "An error occurred while submitting the form."); // Show error toast
+    }
   };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-primary text-light p-6 pt-24">
       <div className="bg-white text-black p-8 rounded-lg shadow-lg w-full max-w-lg">
         <h2 className="text-3xl font-bold text-center text-primary mb-6">Join Tampere Titans</h2>
-        
-        {error && <p className="text-red-500 text-center mb-4">{error}</p>} {/* Show error if any */}
+
+        {/* No longer need to display the error message */}
+        {/* {error && <p className="text-red-500 text-center mb-4">{error}</p>} */}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
