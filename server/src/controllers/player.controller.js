@@ -54,16 +54,17 @@ const registerPlayer = asyncHandler(async (req, res) => {
 
 const approvePlayer = asyncHandler(async (req, res) => {
   try {
-    const { jerseyNum } = req.body; // Get jersey number from request
+    // const { jerseyNum } = req.body; // Get jersey number from request
     const playerId = req.params.id;
+    
 
-    if (!jerseyNum || jerseyNum <= 0) {
-      return res.status(400).json({ message: "Invalid jersey number" });
-    }
-
+    // if (!jerseyNum || jerseyNum <= 0) {
+    //   return res.status(400).json({ message: "Invalid jersey number" });
+    // }
+    
     const updatedPlayer = await Player.findByIdAndUpdate(
       playerId,
-      { isApproved: true, jerseyNum },
+      { isApproved: true },
       { new: true }
     );
 

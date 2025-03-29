@@ -1,20 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// Dummy Player Data (Replace with actual players)
-// const players = [
-//   { name: "John Doe", position: "Goalkeeper", joiningDate: "2018", number: "1", image: "src/assets/player.png" },
-//   { name: "John Doe", position: "Goalkeeper", joiningDate: "2018", number: "2", image: "src/assets/player.png" },
-//   { name: "Alex Smith", position: "Defender", joiningDate: "2018", number: "5", image: "src/assets/player.png" },
-//   { name: "Alex Smith", position: "Defender", joiningDate: "2018", number: "3", image: "src/assets/player.png" },
-//   { name: "Alex Smith", position: "Defender", joiningDate: "2018", number: "4", image: "src/assets/player.png" },
-//   { name: "Ryan Wilson", position: "Defender", joiningDate: "2018", number: "10", image: "src/assets/player.png" },
-//   { name: "David Brown", position: "Midfielder", joiningDate: "2018", number: "10", image: "src/assets/player.png" },
-//   { name: "Chris Johnson", position: "Midfielder", joiningDate: "2018", number: "11", image: "src/assets/player.png" },
-//   { name: "Michael Lee", position: "Forward", joiningDate: "2018", number: "9", image: "src/assets/player.png" },
-//   { name: "James Anderson", position: "Forward", joiningDate: "2018", number: "7", image: "src/assets/player.png" },
-// ];
-
-// Function to filter players by position
 
 
 const Players = () => {
