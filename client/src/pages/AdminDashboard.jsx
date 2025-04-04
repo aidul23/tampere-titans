@@ -9,9 +9,12 @@ function AdminDashboard() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [editPlayer, setEditPlayer] = useState(null);
+  const [activities, setActivities] = useState([]);
+  const [editActivity, setEditActivity] = useState(null);
 
   useEffect(() => {
     fetchPlayers();
+    fetchActivities();
   }, []);
 
   const fetchPlayers = async () => {
@@ -23,6 +26,26 @@ function AdminDashboard() {
       setError("Failed to fetch players");
     }
     setLoading(false);
+  };
+
+  const fetchActivities = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/api/v1/activity/activities");
+      setActivities(response.data);
+    } catch (err) {
+      setError("Failed to fetch activities");
+    }
+  };
+
+  // Delete activity
+  const deleteActivity = async (activityId) => {
+    if (!window.confirm("Are you sure you want to delete this activity?")) return;
+    try {
+      await axios.delete(`http://localhost:8000/api/v1/activity/activities/${activityId}`);
+      fetchActivities();
+    } catch (err) {
+      setError("Failed to delete activity");
+    }
   };
 
   const approvePlayer = async (playerId) => {
@@ -63,6 +86,38 @@ function AdminDashboard() {
     }
   };
 
+  // Toggle Captain Status
+  const toggleCaptain = async () => {
+    try {
+      const updatedPlayer = { ...editPlayer, isCaptain: !editPlayer.isCaptain };
+      await axios.put(`http://localhost:8000/api/v1/players/${editPlayer._id}`, updatedPlayer);
+      setEditPlayer(updatedPlayer);
+      fetchPlayers();
+    } catch (err) {
+      setError("Failed to update captain status");
+    }
+  };
+
+  // Edit activity
+  const openEditActivityModal = (activity) => {
+    setEditActivity({ ...activity });
+  };
+
+  const handleActivityChange = (e) => {
+    setEditActivity({ ...editActivity, [e.target.name]: e.target.value });
+  };
+
+  const handleActivitySubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:8000/api/v1/activity/activities/${editActivity._id}`, editActivity);
+      setEditActivity(null);
+      fetchActivities();
+    } catch (err) {
+      setError("Failed to update activity");
+    }
+  };
+
   const filteredPlayers = players.filter((player) => {
     if (activeTab === "requested") return !player.isApproved;
     if (activeTab === "approved") return player.isApproved;
@@ -75,7 +130,7 @@ function AdminDashboard() {
       {error && <p className="text-red-500 text-center">{error}</p>}
       <div>
         <Link to="/create-tournament" className="bg-green-500 text-white px-4 py-2 rounded">➕ Create Tournament</Link>
-        <Link to="/post" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Acitivity</Link>
+        <Link to="/post" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Activity</Link>
       </div>
 
       <h2 className="text-2xl font-bold mb-4 mt-6">Player Lists</h2>
@@ -128,9 +183,67 @@ function AdminDashboard() {
             <input type="text" name="position" value={editPlayer.position} onChange={handleEditChange} className="border p-2 w-full my-2" />
             <input type="text" name="email" value={editPlayer.email} onChange={handleEditChange} className="border p-2 w-full my-2" />
             <input type="text" name="phone" value={editPlayer.phone} onChange={handleEditChange} className="border p-2 w-full my-2" />
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+
+            {/* Make Captain Button */}
+            <button
+              type="button"
+              onClick={toggleCaptain}
+              className={`px-4 py-2 rounded text-white ${editPlayer.isCaptain ? "bg-red-500" : "bg-blue-500"}`}
+            >
+              {editPlayer.isCaptain ? "Remove Captain" : "Make Captain"}
+            </button>
+
+            <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded ml-2">Save</button>
             <button onClick={() => setEditPlayer(null)} className="bg-gray-400 text-white px-4 py-2 rounded ml-2">Cancel</button>
           </form>
+        </div>
+      )}
+
+      {/* Activity Management */}
+      <h2 className="text-2xl font-bold mb-4 mt-6">Activity List</h2>
+      <div className="my-4">
+        {activities.map((activity) => (
+          <div key={activity._id} className="border p-4 mb-4 rounded-lg">
+            <img src={activity.image} alt={activity.title} className="w-40 h-40 object-cover mb-2" />
+            <h3 className="font-semibold">{activity.title}</h3>
+            <p>{activity.description}</p>
+            <div className="mt-2">
+              <button onClick={() => openEditActivityModal(activity)} className="bg-yellow-500 text-white px-3 py-1 rounded mr-2">
+                <FaEdit />
+              </button>
+              <button onClick={() => deleteActivity(activity._id)} className="bg-red-500 text-white px-3 py-1 rounded">
+                <FaTrash />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Edit Activity Modal */}
+      {editActivity && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-50 p-6">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+            <h3 className="text-lg font-bold">Edit Activity</h3>
+            <form onSubmit={handleActivitySubmit}>
+              <input
+                type="text"
+                name="title"
+                value={editActivity.title}
+                onChange={handleActivityChange}
+                className="border p-2 w-full my-2"
+                placeholder="Title"
+              />
+              <textarea
+                name="description"
+                value={editActivity.description}
+                onChange={handleActivityChange}
+                className="border p-2 w-full my-2"
+                placeholder="Description"
+              />
+              <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+              <button onClick={() => setEditActivity(null)} className="bg-gray-400 text-white px-4 py-2 rounded ml-2">Cancel</button>
+            </form>
+          </div>
         </div>
       )}
     </div>

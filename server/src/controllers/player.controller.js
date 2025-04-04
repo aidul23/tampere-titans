@@ -87,6 +87,8 @@ const getAllPlayers = asyncHandler(async (req, res) => {
   }
 })
 
+
+
 const deletePlayer = asyncHandler(async (req, res) => {
   try {
     const player = await Player.findByIdAndDelete(req.params.id);
@@ -123,4 +125,16 @@ const getApprovedPlayers = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerPlayer, approvePlayer, getAllPlayers, deletePlayer, updatePlayer, getApprovedPlayers }
+const getPlayer = asyncHandler(async (req, res) => {
+  try {
+    const player = await Player.findById(req.params.id);
+    if (!player) {
+      return res.status(404).json({ message: "Player not found" });
+    }
+    res.status(200).json({ player });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+})
+
+module.exports = { registerPlayer, approvePlayer, getAllPlayers, deletePlayer, updatePlayer, getApprovedPlayers, getPlayer }

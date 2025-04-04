@@ -16,6 +16,7 @@ import Activity from "./pages/Activity";
 import ErrorBoundary from "./components/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 import PostActivity from "./pages/PostActivity";
+import PlayerDetails from "./pages//PlayerDetails";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/join" element={<JoinUs />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/players" element={<Players />} />
+        <Route path="/players/:id" element={<PlayerDetails />} />
         <Route path="/tournaments" element={<Tournaments />} />
         <Route path="/tournament/:id" element={<TournamentDetails />} />
         <Route path="/admin" element={<AdminLogin />} />

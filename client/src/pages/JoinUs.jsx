@@ -12,10 +12,7 @@ const JoinUs = () => {
     image: null,
     position: "",
   });
-
-  // Error and success state (No longer needed, as we're using toast)
-  // const [error, setError] = useState("");
-  // const [success, setSuccess] = useState("");
+  const [loading, setLoading] = useState(false); // Loading state
 
   // Handle input changes
   const handleChange = (e) => {
@@ -51,8 +48,7 @@ const JoinUs = () => {
       return;
     }
 
-    // Clear any previous error
-    toast.dismiss();
+    setLoading(true); // Set loading to true when form submission starts
 
     const form = new FormData();
     form.append("name", formData.name);
@@ -83,6 +79,8 @@ const JoinUs = () => {
       }
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred while submitting the form."); // Show error toast
+    } finally {
+      setLoading(false); // Set loading to false once the submission is complete
     }
   };
 
@@ -90,9 +88,6 @@ const JoinUs = () => {
     <div className="min-h-screen flex items-center justify-center bg-primary text-light p-6 pt-24">
       <div className="bg-white text-black p-8 rounded-lg shadow-lg w-full max-w-lg">
         <h2 className="text-3xl font-bold text-center text-primary mb-6">Join Tampere Titans</h2>
-
-        {/* No longer need to display the error message */}
-        {/* {error && <p className="text-red-500 text-center mb-4">{error}</p>} */}
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Name */}
@@ -182,7 +177,11 @@ const JoinUs = () => {
 
           {/* Submit Button */}
           <button type="submit" className="w-full bg-secondary text-black font-bold py-2 rounded hover:bg-accent transition">
-            Submit Application
+            {loading ? (
+              <span>Loading...</span> // You can replace this with a spinner icon if desired
+            ) : (
+              "Submit Application"
+            )}
           </button>
         </form>
       </div>

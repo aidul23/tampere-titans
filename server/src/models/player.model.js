@@ -37,6 +37,10 @@ const playerSchema = new mongoose.Schema(
         type: Number,
         default: 0
       },
+      isCaptain: {
+        type: Boolean,
+        default: false,
+      },
       isApproved: {
         type: Boolean,
         default: false, // Initially false when registering

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-
+import { Link } from "react-router-dom";
 
 const Players = () => {
   const [players, setPlayers] = useState([]);
@@ -76,7 +75,7 @@ const Players = () => {
 const PlayerCard = ({ player }) => {
   const joiningYear = player.createdAt ? new Date(player.createdAt).getFullYear() : "Unknown";
   return (
-    <div className="relative w-56 h-72 bg-white text-black rounded-xl shadow-lg overflow-hidden 
+    <Link to={`/players/${player._id}`} className="relative w-56 h-72 bg-white text-black rounded-xl shadow-lg overflow-hidden 
       transform hover:scale-105 transition duration-300 group">
 
       {/* Player Image */}
@@ -89,7 +88,18 @@ const PlayerCard = ({ player }) => {
         {/* Player Info (Name & Jersey Number Always Visible) */}
         <div className="space-y-1 relative top-4 transition-all duration-300 transform group-hover:-translate-y-2">
           <h2 className="text-5xl font-bold text-white">{player.jerseyNum}</h2>
-          <h3 className="text-lg font-bold text-white">{player.name}</h3>
+          <div className="flex items-center space-x-2">
+            <h3 className="text-lg font-bold text-white">{player.name}</h3>
+
+            {/* Display Captain Band Image */}
+            {player.isCaptain && (
+              <img
+                src="src/assets/captain-band.png"
+                alt="captain badge"
+                className="w-6 h-6 object-cover"
+              />
+            )}
+          </div>
         </div>
 
         <div className="group-hover:block hidden mt-2 border-t border-gray-500"></div>
@@ -100,7 +110,7 @@ const PlayerCard = ({ player }) => {
           <p className="text-base text-accent font-semibold">{player.position}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
