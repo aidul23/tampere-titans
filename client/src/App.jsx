@@ -17,6 +17,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 import PostActivity from "./pages/PostActivity";
 import PlayerDetails from "./pages//PlayerDetails";
+import PrivateRoute from "./routes/PrivateRoute"
 
 function App() {
   return (
@@ -31,9 +32,12 @@ function App() {
         <Route path="/tournaments" element={<Tournaments />} />
         <Route path="/tournament/:id" element={<TournamentDetails />} />
         <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        {/* Protected Route */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        </Route>
         <Route path="/create-tournament" element={<CreateTournament />} />
-        <Route path="/post" element={<PostActivity/>} />
+        <Route path="/post" element={<PostActivity />} />
         <Route
           path="/activities"
           element={

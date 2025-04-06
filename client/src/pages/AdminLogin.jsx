@@ -1,4 +1,4 @@
-import { React, useState } from 'react'
+import { React, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 
 function AdminLogin() {
@@ -12,11 +12,27 @@ function AdminLogin() {
         setError("");
 
         try {
-            if (email && email === "titans@admin.com" && password && password == "123456") {
+            const response = await fetch("http://localhost:8000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email, password }),
+            });
+
+            const data = await response.json();
+
+            if (response.status === 200) {
+                // If login is successful, navigate to the admin dashboard
+                localStorage.setItem("isAdminAuthenticated", "true");
+                localStorage.setItem("loginTime", new Date().toISOString());
                 navigate("/admin-dashboard");
+            } else {
+                // Show error if credentials are invalid
+                setError(data.error);
             }
         } catch (err) {
-            setError("Invalid credentials");
+            setError("An error occurred. Please try again.");
         }
     };
 
@@ -59,4 +75,4 @@ function AdminLogin() {
     );
 }
 
-export default AdminLogin
+export default AdminLogin;

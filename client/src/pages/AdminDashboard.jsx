@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaTrash, FaEdit, FaSignOutAlt } from "react-icons/fa";
 
 function AdminDashboard() {
   const [players, setPlayers] = useState([]);
@@ -11,6 +11,8 @@ function AdminDashboard() {
   const [editPlayer, setEditPlayer] = useState(null);
   const [activities, setActivities] = useState([]);
   const [editActivity, setEditActivity] = useState(null);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchPlayers();
@@ -124,9 +126,29 @@ function AdminDashboard() {
     return true;
   });
 
+  const handleLogout = () => {
+    // Clear authentication from localStorage
+    localStorage.removeItem("isAdminAuthenticated");
+    localStorage.removeItem("loginTime");
+
+    // Redirect to login page
+    navigate("/admin");
+  };
+
   return (
     <div className="p-8 mt-16">
-      <h2 className="text-4xl font-bold text-center mb-4">Admin Dashboard</h2>
+      <div className="flex justify-between items-center">
+        <h2 className="text-4xl font-bold text-center mb-4">Admin Dashboard</h2>
+
+        {/* Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="flex items-center bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-300"
+        >
+          <FaSignOutAlt className="mr-2" />
+          Logout
+        </button>
+      </div>
       {error && <p className="text-red-500 text-center">{error}</p>}
       <div>
         <Link to="/create-tournament" className="bg-green-500 text-white px-4 py-2 rounded">➕ Create Tournament</Link>
