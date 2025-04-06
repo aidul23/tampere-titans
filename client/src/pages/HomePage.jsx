@@ -51,7 +51,7 @@ const HomePage = () => {
       </div>
 
       {/* Achievements Section */}
-      <section className="min-h-screen text-black w-full py-16 px-6 text-center relative">
+      <section className="min-h-screen text-black w-full py-16 px-6 text-center relative flex items-center justify-center flex-col">
         {/* Background Image Container */}
         <div
           className="absolute top-0 bottom-0 right-0 w-[50vw] bg-no-repeat bg-cover bg-center"
@@ -65,28 +65,30 @@ const HomePage = () => {
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent"></div>
 
-        {/* Content */}
-        <h2 className="text-4xl font-bold mb-8 text-white relative z-10">Our Achievements</h2>
+        {/* Content Block Centered */}
+        <div className="relative z-10 max-w-4xl w-full">
+          <h2 className="text-4xl font-bold mb-8 text-white">Achievements</h2>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto relative z-10">
-          <div className="bg-white/80 p-6 rounded-xl shadow-lg">
-            <h3 className="text-xl font-semibold text-primary">⚽ League Champions 2023</h3>
-            <p className="mt-2 text-gray-700">Dominated the league with 15 wins and only 1 draw.</p>
-          </div>
-          <div className="bg-white/80 p-6 rounded-xl shadow-lg">
-            <h3 className="text-xl font-semibold text-primary">🥇 Best Defensive Team</h3>
-            <p className="mt-2 text-gray-700">Only 6 goals conceded in the whole season.</p>
-          </div>
-          <div className="bg-white/80 p-6 rounded-xl shadow-lg">
-            <h3 className="text-xl font-semibold text-primary">🏆 Fair Play Award</h3>
-            <p className="mt-2 text-gray-700">Recognized for sportsmanship and clean game.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white/80 p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-semibold text-primary">⚽ League Champions 2023</h3>
+              <p className="mt-2 text-gray-700">Dominated the league with 15 wins and only 1 draw.</p>
+            </div>
+            <div className="bg-white/80 p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-semibold text-primary">🥇 Best Defensive Team</h3>
+              <p className="mt-2 text-gray-700">Only 6 goals conceded in the whole season.</p>
+            </div>
+            <div className="bg-white/80 p-6 rounded-xl shadow-lg">
+              <h3 className="text-xl font-semibold text-primary">🏆 Fair Play Award</h3>
+              <p className="mt-2 text-gray-700">Recognized for sportsmanship and clean game.</p>
+            </div>
           </div>
         </div>
       </section>
 
 
       {/* Upcoming Events Section */}
-      <section className="min-h-screen text-black w-full py-16 px-6 text-center relative">
+      <section className="min-h-screen text-black w-full py-16 px-6 text-center relative flex items-center justify-center flex-col">
         {/* Background Image Container */}
         <div
           className="absolute top-0 bottom-0 left-0 w-[50vw] bg-no-repeat bg-cover bg-center"
@@ -98,12 +100,12 @@ const HomePage = () => {
         ></div>
 
         {/* Overlay Gradient */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent"></div>
 
-        <h2 className="text-4xl font-bold mb-8 text-primary">Upcoming Events</h2>
-        <div className="space-y-6 max-w-3xl mx-auto">
+        <h2 className="text-4xl font-bold mb-8 text-primary relative z-10">Upcoming Events</h2>
+        <div className="relative z-10 max-w-2xl w-full">
           {events.map((event) => (
-            <div key={event.id} className="bg-white p-4 rounded-xl shadow-md relative">
+            <div key={event.id} className="bg-white p-4 rounded-xl shadow-md relative mt-4">
               {/* Banner image */}
               <div
                 className="absolute top-0 left-0 right-0 h-56 rounded-t-xl"
