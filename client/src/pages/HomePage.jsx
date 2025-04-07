@@ -1,4 +1,5 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from "axios";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Countdown from 'react-countdown';
@@ -6,6 +7,21 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 const HomePage = () => {
   const navigate = useNavigate();
+
+  const [achievements, setAchievements] = useState([]);
+
+  useEffect(() => {
+    const fetchAchievements = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/v1/achievement/achievements");
+        setAchievements(response.data);
+      } catch (error) {
+        console.error("Error fetching achievements:", error);
+      }
+    };
+
+    fetchAchievements();
+  }, []);
 
   const events = [
     {
@@ -70,45 +86,39 @@ const HomePage = () => {
           <h2 className="text-4xl font-bold mb-8 text-white">Achievements</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-white/80 p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-semibold text-primary">⚽ League Champions 2023</h3>
-              <p className="mt-2 text-gray-700">Dominated the league with 15 wins and only 1 draw.</p>
-            </div>
-            <div className="bg-white/80 p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-semibold text-primary">🥇 Best Defensive Team</h3>
-              <p className="mt-2 text-gray-700">Only 6 goals conceded in the whole season.</p>
-            </div>
-            <div className="bg-white/80 p-6 rounded-xl shadow-lg">
-              <h3 className="text-xl font-semibold text-primary">🏆 Fair Play Award</h3>
-              <p className="mt-2 text-gray-700">Recognized for sportsmanship and clean game.</p>
-            </div>
+            {achievements.map((ach, index) => (
+              <div key={index} className="bg-white/80 p-6 rounded-xl shadow-lg">
+                <h3 className="text-xl font-semibold text-primary">{ach.title}</h3>
+                <p className="mt-2 text-gray-700">{ach.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
 
       {/* Upcoming Events Section */}
-      <section className="min-h-screen text-black w-full py-16 px-6 text-center relative flex items-center justify-center flex-col">
+      <section className="min-h-screen bg-primary text-black w-full py-16 px-6 text-center relative flex items-center justify-center flex-col">
         {/* Background Image Container */}
         <div
           className="absolute top-0 bottom-0 left-0 w-[50vw] bg-no-repeat bg-cover bg-center"
           style={{
             backgroundImage: "url('/src/assets/ball-net.png')",
             transform: 'translateX(-20%)', // Push half out of the screen to the left
-            opacity: '0.3',
+            opacity: '0.2',
           }}
         ></div>
 
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent"></div>
 
-        <h2 className="text-4xl font-bold mb-8 text-primary relative z-10">Upcoming Events</h2>
+        <h2 className="text-4xl font-bold mb-8 text-accent relative z-10">Upcoming Events</h2>
         <div className="relative z-10 max-w-2xl w-full">
           {events.map((event) => (
             <div key={event.id} className="bg-white p-4 rounded-xl shadow-md relative mt-4">
               {/* Banner image */}
               <div
-                className="absolute top-0 left-0 right-0 h-56 rounded-t-xl"
+                className="absolute top-0 left-0 right-0 h-60 rounded-t-xl"
                 style={{
                   backgroundImage: `url(${event.image})`,
                   backgroundSize: 'cover',
@@ -142,7 +152,7 @@ const HomePage = () => {
 
 
       {/* Social Media Section */}
-      <section className="bg-primary text-white py-16 px-6 text-center w-full">
+      <section className="bg-primary text-white py-6 px-6 text-center w-full">
         <h2 className="text-4xl font-bold mb-6 text-accent">Follow Us</h2>
         <div className="flex justify-center gap-6 text-3xl">
           <a

@@ -8,14 +8,6 @@ const tournaments = [
     date: "July 15-20, 2024",
     location: "Tampere Stadium",
     image: "src/assets/tournament.jpg",
-    isLive: true
-  },
-  {
-    id: 2,
-    name: "Winter Titans League",
-    date: "December 5-10, 2024",
-    location: "Tampere Indoor Arena",
-    image: "src/assets/tournament.jpg",
     isLive: false
   },
 ];
@@ -38,10 +30,13 @@ const Tournaments = () => {
 
                 <div className="p-4">
                   <h2 className="text-2xl font-bold text-secondary">{tournament.name}</h2>
-                  {tournament.isLive && (
+                  {tournament.isLive ? (
                     <div className="inline-block px-3 py-1 mt-2 text-sm w-20 font-semibold text-white bg-green-500 rounded-full flex items-center">
                       <span className="w-2 h-2 bg-white rounded-full animate-pulse mr-2"></span>
                       Live
+                    </div>) : (
+                    <div className="inline-block px-3 py-1 mt-2 text-sm w-20 font-semibold text-white bg-red-500 rounded-full flex items-center">
+                      Finished
                     </div>)}
                   <p className="text-gray-600 m-2">📅 {tournament.date}</p>
                   <p className="text-gray-600 m-2">📍 {tournament.location}</p>

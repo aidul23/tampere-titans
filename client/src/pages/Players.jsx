@@ -25,7 +25,7 @@ const Players = () => {
 
   return (
     <div className="min-h-screen bg-primary text-white pt-24 p-6">
-      <h1 className="text-4xl font-bold text-center mb-10 text-secondary">Our Titans Squad</h1>
+      <h1 className="text-4xl font-bold text-center mb-10 text-secondary">Titans Squad</h1>
 
       <div className="container mx-auto grid gap-12">
         {/* Goalkeepers Section */}

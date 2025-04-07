@@ -11,7 +11,7 @@ const AboutPage = () => {
       <div className="flex flex-col lg:flex-row justify-center items-center space-y-8 lg:space-x-8 lg:space-y-0">
         {/* Left Section: Text */}
         <div className="w-full lg:w-1/2 text-left">
-          <h2 className="text-3xl font-semibold text-primary mb-4">Who We Are</h2>
+          <h2 className="text-3xl font-semibold text-primary mb-4">Who We Are?</h2>
           <p className="text-lg text-gray-700 mb-4">
           Welcome to <span className="text-secondary"><strong>Tampere Titans</strong></span>, a passionate football club committed to excellence, teamwork, and sportsmanship by Bangladeshi community in Tampere, Finland.
           Established in 2017, we have been bringing together talented players and dedicated fans to celebrate the beautiful game.

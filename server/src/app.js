@@ -32,8 +32,10 @@ app.post("/login", (req, res) => {
 
 const playerRouter = require("./routes/player.router");
 const activityRouter = require("./routes/activity.router");
+const achievementRouter = require("./routes/achievement.router");
 
 app.use("/api/v1/players", playerRouter);
 app.use("/api/v1/activity", activityRouter);
+app.use("/api/v1/achievement", achievementRouter);
 
 module.exports = { app };

@@ -17,7 +17,8 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import { ToastContainer } from "react-toastify";
 import PostActivity from "./pages/PostActivity";
 import PlayerDetails from "./pages//PlayerDetails";
-import PrivateRoute from "./routes/PrivateRoute"
+import PrivateRoute from "./routes/PrivateRoute";
+import PostAchievement from "./pages/PostAchievement";
 
 function App() {
   return (
@@ -46,6 +47,7 @@ function App() {
             </ErrorBoundary>
           }
         />
+        <Route path="/achievement" element={<PostAchievement />} />
       </Routes>
       <Footer />
       <ToastContainer

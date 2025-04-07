@@ -10,13 +10,16 @@ function AdminDashboard() {
   const [error, setError] = useState("");
   const [editPlayer, setEditPlayer] = useState(null);
   const [activities, setActivities] = useState([]);
+  const [achievements, setAchievements] = useState([]);
   const [editActivity, setEditActivity] = useState(null);
+  const [editAchievement, setEditAchievement] = useState(null);
 
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchPlayers();
     fetchActivities();
+    fetchAchievements();
   }, []);
 
   const fetchPlayers = async () => {
@@ -28,6 +31,15 @@ function AdminDashboard() {
       setError("Failed to fetch players");
     }
     setLoading(false);
+  };
+
+  const fetchAchievements = async () => {
+    try {
+      const response = await axios.get("http://localhost:8000/api/v1/achievement/achievements");
+      setAchievements(response.data);
+    } catch (err) {
+      setError("Failed to fetch achievements");
+    }
   };
 
   const fetchActivities = async () => {
@@ -47,6 +59,17 @@ function AdminDashboard() {
       fetchActivities();
     } catch (err) {
       setError("Failed to delete activity");
+    }
+  };
+
+  // Delete achievement
+  const deleteAchievement = async (achievementId) => {
+    if (!window.confirm("Are you sure you want to delete this achievement?")) return;
+    try {
+      await axios.delete(`http://localhost:8000/api/v1/achievement/achievements/${achievementId}`);
+      fetchAchievements();
+    } catch (err) {
+      setError("Failed to delete achievement");
     }
   };
 
@@ -120,6 +143,26 @@ function AdminDashboard() {
     }
   };
 
+  // Edit achievement
+  const openEditAchievementModal = (achievement) => {
+    setEditAchievement({ ...achievement });
+  };
+
+  const handleAchievementChange = (e) => {
+    setEditAchievement({ ...editAchievement, [e.target.name]: e.target.value });
+  };
+
+  const handleAchievementSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.put(`http://localhost:8000/api/v1/achievement/achievements/${editAchievement._id}`, editAchievement);
+      setEditAchievement(null);
+      fetchAchievements();
+    } catch (err) {
+      setError("Failed to update achievement");
+    }
+  };
+
   const filteredPlayers = players.filter((player) => {
     if (activeTab === "requested") return !player.isApproved;
     if (activeTab === "approved") return player.isApproved;
@@ -153,6 +196,8 @@ function AdminDashboard() {
       <div>
         <Link to="/create-tournament" className="bg-green-500 text-white px-4 py-2 rounded">➕ Create Tournament</Link>
         <Link to="/post" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Activity</Link>
+        <Link to="/achievement" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Achievement</Link>
+        <Link to="/achievement" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Event</Link>
       </div>
 
       <h2 className="text-2xl font-bold mb-4 mt-6">Player Lists</h2>
@@ -241,6 +286,25 @@ function AdminDashboard() {
         ))}
       </div>
 
+      {/* Achievement Management */}
+      <h2 className="text-2xl font-bold mb-4 mt-6">Achievement List</h2>
+      <div className="my-4">
+        {achievements.map((achievement) => (
+          <div key={achievement._id} className="border p-4 mb-4 rounded-lg">
+            <h3 className="font-semibold">{achievement.title}</h3>
+            <p>{achievement.description}</p>
+            <div className="mt-2">
+              <button onClick={() => openEditAchievementModal(achievement)} className="bg-yellow-500 text-white px-3 py-1 rounded mr-2">
+                <FaEdit />
+              </button>
+              <button onClick={() => deleteAchievement(achievement._id)} className="bg-red-500 text-white px-3 py-1 rounded">
+                <FaTrash />
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+
       {/* Edit Activity Modal */}
       {editActivity && (
         <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-50 p-6">
@@ -264,6 +328,34 @@ function AdminDashboard() {
               />
               <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
               <button onClick={() => setEditActivity(null)} className="bg-gray-400 text-white px-4 py-2 rounded ml-2">Cancel</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Edit Achievement Modal */}
+      {editAchievement && (
+        <div className="fixed inset-0 flex justify-center items-center bg-black bg-opacity-70 z-50 p-6">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-2xl">
+            <h3 className="text-lg font-bold">Edit Achievement</h3>
+            <form onSubmit={handleAchievementSubmit}>
+              <input
+                type="text"
+                name="title"
+                value={editAchievement.title}
+                onChange={handleAchievementChange}
+                className="border p-2 w-full my-2"
+                placeholder="Title"
+              />
+              <textarea
+                name="description"
+                value={editAchievement.description}
+                onChange={handleAchievementChange}
+                className="border p-2 w-full my-2"
+                placeholder="Description"
+              />
+              <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Save</button>
+              <button onClick={() => setEditAchievement(null)} className="bg-gray-400 text-white px-4 py-2 rounded ml-2">Cancel</button>
             </form>
           </div>
         </div>
