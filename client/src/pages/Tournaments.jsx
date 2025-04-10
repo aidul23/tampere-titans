@@ -5,8 +5,8 @@ const tournaments = [
   {
     id: 1,
     name: "Tampere Football Mania",
-    date: "July 15-20, 2024",
-    location: "Tampere Stadium",
+    date: "September 7, 2024",
+    location: "Ahvenisjärvi Soccer Fields",
     image: "src/assets/tournament.jpg",
     isLive: false
   },

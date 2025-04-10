@@ -19,8 +19,8 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><a href="/" className="text-sm hover:text-gray-400">Home</a></li>
               <li><a href="/about" className="text-sm hover:text-gray-400">About</a></li>
-              <li><a href="/team" className="text-sm hover:text-gray-400">Our Team</a></li>
-              <li><a href="/schedule" className="text-sm hover:text-gray-400">Schedule</a></li>
+              <li><a href="/players" className="text-sm hover:text-gray-400">Our Team</a></li>
+              <li><a href="/activities" className="text-sm hover:text-gray-400">Activity</a></li>
               <li><a href="/tournaments" className="text-sm hover:text-gray-400">Tournaments</a></li>
             </ul>
           </div>
@@ -65,7 +65,7 @@ const Footer = () => {
 
         {/* Footer Bottom */}
         <div className="mt-10 border-t border-gray-700 pt-6 text-center">
-          <p className="text-sm">&copy; 2025 Tampere Titans. All Rights Reserved.</p>
+          <p className="text-sm">&copy; 2025 <a href="https://www.linkedin.com/in/aidul23/" target="_blank" rel="noopener noreferrer">Md Aidul Islam</a>. All Rights Reserved.</p>
         </div>
       </div>
     </footer>

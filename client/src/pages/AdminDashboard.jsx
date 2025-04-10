@@ -13,6 +13,8 @@ function AdminDashboard() {
   const [achievements, setAchievements] = useState([]);
   const [editActivity, setEditActivity] = useState(null);
   const [editAchievement, setEditAchievement] = useState(null);
+  const [newAchievement, setNewAchievement] = useState({ title: "", tournament: "", date: "" });
+
 
   const navigate = useNavigate();
 
@@ -241,30 +243,138 @@ function AdminDashboard() {
         </table>
       )}
 
-      {editPlayer && (
-        <div className="fixed inset-0 flex justify-center items-center bg-gray-900 bg-opacity-50">
-          <form onSubmit={handleEditSubmit} className="bg-white p-4 rounded">
-            <h3 className="text-lg font-bold">Edit Player</h3>
-            <input type="text" name="name" value={editPlayer.name} onChange={handleEditChange} className="border p-2 w-full my-2" />
-            <input type="number" name="jerseyNum" value={editPlayer.jerseyNum} onChange={handleEditChange} className="border p-2 w-full my-2" />
-            <input type="text" name="position" value={editPlayer.position} onChange={handleEditChange} className="border p-2 w-full my-2" />
-            <input type="text" name="email" value={editPlayer.email} onChange={handleEditChange} className="border p-2 w-full my-2" />
-            <input type="text" name="phone" value={editPlayer.phone} onChange={handleEditChange} className="border p-2 w-full my-2" />
+{editPlayer && (
+  <div className="fixed inset-0 flex justify-center items-center bg-gray-900 bg-opacity-50 z-50">
+    <form onSubmit={handleEditSubmit} className="bg-white p-6 rounded-lg shadow-lg w-[90%] max-w-md max-h-[90vh] overflow-y-auto">
+      <h3 className="text-xl font-bold mb-4">Edit Player</h3>
 
-            {/* Make Captain Button */}
-            <button
-              type="button"
-              onClick={toggleCaptain}
-              className={`px-4 py-2 rounded text-white ${editPlayer.isCaptain ? "bg-red-500" : "bg-blue-500"}`}
-            >
-              {editPlayer.isCaptain ? "Remove Captain" : "Make Captain"}
-            </button>
+      {/* Basic Info */}
+      <input type="text" name="name" value={editPlayer.name} onChange={handleEditChange} className="border p-2 w-full mb-3" placeholder="Name" />
+      <input type="number" name="jerseyNum" value={editPlayer.jerseyNum} onChange={handleEditChange} className="border p-2 w-full mb-3" placeholder="Jersey Number" />
+      <input type="text" name="position" value={editPlayer.position} onChange={handleEditChange} className="border p-2 w-full mb-3" placeholder="Position" />
+      <input type="email" name="email" value={editPlayer.email} onChange={handleEditChange} className="border p-2 w-full mb-3" placeholder="Email" />
+      <input type="text" name="phone" value={editPlayer.phone} onChange={handleEditChange} className="border p-2 w-full mb-4" placeholder="Phone" />
 
-            <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded ml-2">Save</button>
-            <button onClick={() => setEditPlayer(null)} className="bg-gray-400 text-white px-4 py-2 rounded ml-2">Cancel</button>
-          </form>
-        </div>
-      )}
+      {/* Stats Counter Section */}
+      <div className="mb-4 space-y-3">
+        {["goals", "assists", "matchesPlayed"].map((statKey) => (
+          <div key={statKey} className="flex items-center justify-between">
+            <label className="capitalize font-semibold">{statKey.replace(/([A-Z])/g, " $1")}</label>
+            <div className="flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setEditPlayer(prev => ({
+                  ...prev,
+                  stats: {
+                    ...prev.stats,
+                    [statKey]: Math.max(0, prev.stats?.[statKey] - 1 || 0)
+                  }
+                }))}
+                className="bg-gray-300 px-3 py-1 rounded"
+              >-</button>
+              <span className="min-w-[20px] text-center">{editPlayer.stats?.[statKey] || 0}</span>
+              <button
+                type="button"
+                onClick={() => setEditPlayer(prev => ({
+                  ...prev,
+                  stats: {
+                    ...prev.stats,
+                    [statKey]: (prev.stats?.[statKey] || 0) + 1
+                  }
+                }))}
+                className="bg-gray-300 px-3 py-1 rounded"
+              >+</button>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Achievements Section */}
+<div className="mb-4">
+  <h4 className="font-semibold mb-2">Achievements</h4>
+
+  {/* Existing Achievements List */}
+  {editPlayer.achievements?.length > 0 ? (
+    editPlayer.achievements.map((ach, index) => (
+      <div key={index} className="flex items-center justify-between text-sm mb-1">
+        <span>{ach.title} {ach.tournament && ` - ${ach.tournament}`} {ach.date && `(${ach.date})`}</span>
+        <button
+          type="button"
+          onClick={() =>
+            setEditPlayer(prev => ({
+              ...prev,
+              achievements: prev.achievements.filter((_, i) => i !== index)
+            }))
+          }
+          className="text-red-500 hover:text-red-700 text-xs ml-2"
+        >
+          ✕
+        </button>
+      </div>
+    ))
+  ) : (
+    <p className="text-gray-500 text-sm">No achievements yet.</p>
+  )}
+
+  {/* Input Fields for New Achievement */}
+  <div className="grid grid-cols-1 gap-2 mt-2">
+    <input
+      type="text"
+      placeholder="Title"
+      value={newAchievement.title}
+      onChange={(e) => setNewAchievement({ ...newAchievement, title: e.target.value })}
+      className="border p-2 text-sm rounded"
+    />
+    <input
+      type="text"
+      placeholder="Tournament"
+      value={newAchievement.tournament}
+      onChange={(e) => setNewAchievement({ ...newAchievement, tournament: e.target.value })}
+      className="border p-2 text-sm rounded"
+    />
+    <input
+      type="text"
+      placeholder="Date (optional)"
+      value={newAchievement.date}
+      onChange={(e) => setNewAchievement({ ...newAchievement, date: e.target.value })}
+      className="border p-2 text-sm rounded"
+    />
+    <button
+      type="button"
+      onClick={() => {
+        if (!newAchievement.title) return;
+        setEditPlayer(prev => ({
+          ...prev,
+          achievements: [...(prev.achievements || []), newAchievement]
+        }));
+        setNewAchievement({ title: "", tournament: "", date: "" });
+      }}
+      className="bg-blue-500 hover:bg-blue-600 text-white text-sm px-3 py-1 rounded"
+    >
+      + Add Achievement
+    </button>
+  </div>
+</div>
+
+
+      {/* Captain Button */}
+      <button
+        type="button"
+        onClick={toggleCaptain}
+        className={`px-4 py-2 rounded text-white ${editPlayer.isCaptain ? "bg-red-500" : "bg-blue-500"} mb-3`}
+      >
+        {editPlayer.isCaptain ? "Remove Captain" : "Make Captain"}
+      </button>
+
+      {/* Action Buttons */}
+      <div className="flex justify-end gap-3">
+        <button type="submit" className="bg-green-500 text-white px-4 py-2 rounded">Save</button>
+        <button type="button" onClick={() => setEditPlayer(null)} className="bg-gray-500 text-white px-4 py-2 rounded">Cancel</button>
+      </div>
+    </form>
+  </div>
+)}
+
 
       {/* Activity Management */}
       <h2 className="text-2xl font-bold mb-4 mt-6">Activity List</h2>
