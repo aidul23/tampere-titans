@@ -199,7 +199,7 @@ function AdminDashboard() {
         <Link to="/create-tournament" className="bg-green-500 text-white px-4 py-2 rounded">➕ Create Tournament</Link>
         <Link to="/post" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Activity</Link>
         <Link to="/achievement" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Achievement</Link>
-        <Link to="/achievement" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Event</Link>
+        <Link to="/event" className="bg-green-500 text-white px-4 py-2 rounded ml-2">➕ Post Event</Link>
       </div>
 
       <h2 className="text-2xl font-bold mb-4 mt-6">Player Lists</h2>

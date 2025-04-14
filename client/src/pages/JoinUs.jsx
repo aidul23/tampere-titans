@@ -85,107 +85,133 @@ const JoinUs = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-primary text-light p-6 pt-24">
-      <div className="bg-white text-black p-8 rounded-lg shadow-lg w-full max-w-lg">
-        <h2 className="text-3xl font-bold text-center text-primary mb-6">Join Tampere Titans</h2>
+    
+      <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-primary text-light p-6 pt-24">
+  {/* Left Side: Image and Text */}
+  <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 text-center">
+    <img
+      src="/src/assets/team_logo.png"
+      alt="Join the Team"
+      className="w-60 max-w-md mb-6"
+    />
+    <h2 className="text-4xl font-bold text-white mb-4">Be Part of Something Bigger</h2>
+    <p className="text-lg text-gray-200">
+      Join Tampere Titans and play alongside passionate footballers. We're more than a team —
+      we're a family united by ambition and love for the game.
+    </p>
+  </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {/* Name */}
-          <div>
-            <label className="block font-medium">Full Name</label>
-            <input
-              type="text"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded"
-              placeholder="Enter your full name"
-            />
-          </div>
+  {/* Right Side: Form */}
+  <div className="w-full md:w-1/2 bg-white text-black p-8 rounded-xl shadow-xl mt-10 md:mt-0">
+    <h2 className="text-3xl font-bold text-center text-primary mb-6">Join Tampere Titans</h2>
 
-          {/* Date of Birth (Age Validation) */}
-          <div>
-            <label className="block font-medium">Date of Birth</label>
-            <input
-              type="date"
-              name="dob"
-              value={formData.dob}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-
-          {/* Email */}
-          <div>
-            <label className="block font-medium">Email Address</label>
-            <input
-              type="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded"
-              placeholder="Enter your email"
-            />
-          </div>
-
-          {/* Phone Number */}
-          <div>
-            <label className="block font-medium">Phone Number</label>
-            <input
-              type="tel"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded"
-              placeholder="Enter your phone number"
-            />
-          </div>
-
-          {/* Playing Position Dropdown */}
-          <div>
-            <label className="block font-medium">Preferred Playing Position</label>
-            <select
-              name="position"
-              value={formData.position}
-              onChange={handleChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded"
-            >
-              <option value="">Select Position</option>
-              <option value="Goalkeeper">Goalkeeper</option>
-              <option value="Defender">Defender</option>
-              <option value="Midfielder">Midfielder</option>
-              <option value="Forward">Forward</option>
-            </select>
-          </div>
-
-          {/* Image Upload */}
-          <div>
-            <label className="block font-medium">Upload Your Image</label>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleImageChange}
-              required
-              className="w-full p-2 border border-gray-300 rounded"
-            />
-          </div>
-
-          {/* Submit Button */}
-          <button type="submit" className="w-full bg-secondary text-black font-bold py-2 rounded hover:bg-accent transition">
-            {loading ? (
-              <span>Loading...</span> // You can replace this with a spinner icon if desired
-            ) : (
-              "Submit Application"
-            )}
-          </button>
-        </form>
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Name Field */}
+      <div className="relative">
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+          className="peer w-full px-5 pt-6 pb-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary transition"
+          placeholder=" "
+        />
+        <label className="absolute left-4 top-1.5 bg-white px-1 text-sm text-gray-500 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all">
+          Full Name
+        </label>
       </div>
-    </div>
+
+      {/* Date of Birth */}
+      <div className="relative">
+        <input
+          type="date"
+          name="dob"
+          value={formData.dob}
+          onChange={handleChange}
+          required
+          className="peer w-full px-5 pt-6 pb-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary transition"
+          placeholder=" "
+        />
+        <label className="absolute left-4 top-1.5 bg-white px-1 text-sm text-gray-500 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all">
+          Date of Birth
+        </label>
+      </div>
+
+      {/* Email */}
+      <div className="relative">
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+          className="peer w-full px-5 pt-6 pb-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary transition"
+          placeholder=" "
+        />
+        <label className="absolute left-4 top-1.5 bg-white px-1 text-sm text-gray-500 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all">
+          Email Address
+        </label>
+      </div>
+
+      {/* Phone Number */}
+      <div className="relative">
+        <input
+          type="tel"
+          name="phone"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+          className="peer w-full px-5 pt-6 pb-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary transition"
+          placeholder=" "
+        />
+        <label className="absolute left-4 top-1.5 bg-white px-1 text-sm text-gray-500 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all">
+          Phone Number
+        </label>
+      </div>
+
+      {/* Playing Position */}
+      <div className="relative">
+        <select
+          name="position"
+          value={formData.position}
+          onChange={handleChange}
+          required
+          className="peer w-full px-4 pt-6 pb-2 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-secondary transition bg-white"
+        >
+          <option value="" disabled hidden></option>
+          <option value="Goalkeeper">Goalkeeper</option>
+          <option value="Defender">Defender</option>
+          <option value="Midfielder">Midfielder</option>
+          <option value="Forward">Forward</option>
+        </select>
+        <label className="absolute left-4 top-1.5 bg-white px-1 text-sm text-gray-500 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all">
+          Preferred Position
+        </label>
+      </div>
+
+      {/* Upload Image */}
+      <div className="relative">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          required
+          className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border file:border-gray-300 file:rounded-xl file:text-sm file:font-semibold file:bg-secondary file:text-black hover:file:bg-accent"
+        />
+      </div>
+
+      {/* Submit */}
+      <button
+        type="submit"
+        className="w-full bg-secondary text-black font-bold py-3 rounded-xl hover:bg-accent transition text-lg"
+      >
+        {loading ? "Submitting..." : "Submit Application"}
+      </button>
+    </form>
+  </div>
+</div>
+
   );
 };
 

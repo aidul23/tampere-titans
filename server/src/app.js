@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
+require('dotenv').config();
 
 const app = express();
 
@@ -16,8 +17,8 @@ app.use(express.static("public"));
 app.use(cookieParser());
 
 const ADMIN_CREDENTIALS = {
-  email: "titans@admin.com",
-  password: "123456",
+  email: process.env.ADMIN_EMAIL,
+  password: process.env.ADMIN_PASS,
 };
 
 app.post("/login", (req, res) => {
@@ -32,10 +33,12 @@ app.post("/login", (req, res) => {
 
 const playerRouter = require("./routes/player.router");
 const activityRouter = require("./routes/activity.router");
+const eventRouter = require("./routes/event.router");
 const achievementRouter = require("./routes/achievement.router");
 
 app.use("/api/v1/players", playerRouter);
 app.use("/api/v1/activity", activityRouter);
 app.use("/api/v1/achievement", achievementRouter);
+app.use("/api/v1/event", eventRouter);
 
 module.exports = { app };

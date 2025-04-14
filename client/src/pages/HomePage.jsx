@@ -10,6 +10,8 @@ const HomePage = () => {
 
   const [achievements, setAchievements] = useState([]);
 
+  const [events, setEvents] = useState([]);
+
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
@@ -20,19 +22,19 @@ const HomePage = () => {
       }
     };
 
+    const fetchEvents = async () => {
+      try {
+        const response = await axios.get("http://localhost:8000/api/v1/event/events");
+        setEvents(response.data);
+      } catch (error) {
+        console.error("Error fetching events:", error);
+      }
+    };
+
     fetchAchievements();
+    fetchEvents();
   }, []);
 
-  const events = [
-    {
-      id: 1,
-      title: "Friendly Football Tournament",
-      date: "2025-04-20T17:00:00", // Event date (ISO 8601 format)
-      location: "Stadium Arena",
-      description: "Titans vs Wolves match",
-      image: "https://scontent-hel3-1.xx.fbcdn.net/v/t39.30808-6/476159134_473683085795541_883784141100703877_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=833d8c&_nc_ohc=KbhVC_dT3t0Q7kNvwEsz7H3&_nc_oc=Adl6HJB0mDHGGuIpk6lpM7eV3FcqiDn-8KKMUnT0CE6EjdYPT8apG6xR6y62PPiiZ2U&_nc_zt=23&_nc_ht=scontent-hel3-1.xx&_nc_gid=tc9XpSU5v6Jebh0vDxk6TA&oh=00_AfFtUPPwyVvjS4xnQzR2foU7q6XVAJKzWvI1_1h4AbKS3A&oe=67F86A21" // Banner image URL
-    },
-  ];
 
   return (
     <div className="w-full">
@@ -112,8 +114,8 @@ const HomePage = () => {
         {/* Overlay Gradient */}
         <div className="absolute inset-0 bg-gradient-to-t from-primary/50 to-transparent"></div>
 
-        <h2 className="text-4xl font-bold mb-8 text-accent relative z-10">Upcoming Events</h2>
-        <div className="relative z-10 max-w-2xl w-full">
+        <h2 className="text-4xl font-bold mb-8 text-accent relative z-10">Events</h2>
+        <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl px-4">
           {events.map((event) => (
             <div key={event.id} className="bg-white p-4 rounded-xl shadow-md relative mt-4">
               {/* Banner image */}
@@ -128,22 +130,51 @@ const HomePage = () => {
               />
               <div className="relative pt-56 px-4">  {/* Adjust the padding to create space for the image */}
                 <h3 className="text-xl font-bold">{event.title}</h3>
-                <p className="text-gray-700">📍 {event.location}</p>
+                <p className="">{event.description}</p>
+                <p className="text-gray-700 mt-2">📍 {event.location}</p>
                 <p className="text-gray-700">🗓️ {new Date(event.date).toLocaleDateString()} | 🕒 {new Date(event.date).toLocaleTimeString()}</p>
                 <Countdown
-                  date={new Date(event.date).getTime()}
-                  renderer={({ days, hours, minutes, seconds, completed }) => {
-                    if (completed) {
-                      return <p className="text-green-500 font-bold">Event Started!</p>;
-                    } else {
-                      return (
-                        <p className="text-gray-700 m-2">
-                          <span className="text-4xl font-bold">{days} : {hours} : {minutes} : {seconds}</span>
-                        </p>
-                      );
-                    }
-                  }}
-                />
+  date={new Date(event.date).getTime()}
+  renderer={({ days, hours, minutes, seconds, completed }) => {
+    const eventDate = new Date(event.date);
+    const now = new Date();
+
+    if (completed) {
+      // Check if it's *today* (event is starting now)
+      const isSameDay =
+        eventDate.toDateString() === now.toDateString();
+
+      if (isSameDay) {
+        return (
+          <div className="absolute top-2 right-2 text-green-600 text-white text-sm px-3 py-1 rounded-full shadow-md z-20">
+          Finished
+        </div>
+        );
+      }
+
+      // If the event was before today
+      return (
+        <div className="absolute top-2 right-2 bg-red-500 text-white text-sm px-3 py-1 rounded-full shadow-md z-20">
+          Finished
+        </div>
+      );
+    }
+
+    // Default countdown timer (upcoming)
+    return (
+      <p className="text-gray-700 m-2">
+        <span className="text-4xl font-bold">
+          {days} : {hours} : {minutes} : {seconds}
+        </span>
+        <br />
+        <span className="text-sm font-semibold text-accent">
+          Time Left
+        </span>
+      </p>
+    );
+  }}
+/>
+
               </div>
             </div>
           ))}
