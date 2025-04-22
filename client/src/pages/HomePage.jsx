@@ -177,7 +177,7 @@ const HomePage = () => {
 
                 {new Date() < new Date(event.registrationDeadline) && (
                   <button
-                    onClick={() => navigate(`/events/${event._id}/register`)}
+                    onClick={() => navigate(`/events/${event._id}/register`, { state: { event } })}
                     className="mt-2 bg-secondary text-white px-4 py-2 rounded shadow hover:bg-primary transition"
                   >
                     Register Now

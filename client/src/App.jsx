@@ -21,6 +21,7 @@ import PrivateRoute from "./routes/PrivateRoute";
 import PostAchievement from "./pages/PostAchievement";
 import CreateEvent from "./pages/CreateEvent";
 import EventRegistration from "./pages/EventRegistration";
+import EventDetails from "./pages/EventDetails";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
         <Route path="/achievement" element={<PostAchievement />} />
         <Route path="/event" element={<CreateEvent />} />
         <Route path="/events/:id/register" element={<EventRegistration />} />
+        <Route path="/event/:id" element={<EventDetails />} />
       </Routes>
       <Footer />
       <ToastContainer

@@ -7,6 +7,22 @@ const eventSchema = new mongoose.Schema({
   location: { type: String, required: true },
   description: { type: String },
   image: { type: String, required: true }, // URL to banner image
+  registeredTeams: [
+    {
+      teamName: String,
+      city: String,
+      logo: String,
+      managerEmail: String,
+      managerPhone: String,
+      transactionId: String,
+      hasPaid: Boolean,
+      isApproved: { type: Boolean, default: false},
+      registeredAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+  ],
 }, {
   timestamps: true,
 });

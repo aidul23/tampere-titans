@@ -109,4 +109,111 @@ const deleteEvent = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { postEvent, getAllEvents, deleteEvent, editEvent }
+const registerTeam = asyncHandler(async (req, res) => {
+  const { eventId } = req.params;
+  const {
+    teamName,
+    city,
+    managerEmail,
+    managerPhone,
+    hasPaid,
+    transactionId,
+  } = req.body;
+
+  const logoLocalPath = req.files?.logo?.[0]?.path;
+
+  if (!logoLocalPath) {
+    throw new ApiError(400, "Team logo is required");
+  }
+
+  const logoUpload = await uploadOnCloudinary(logoLocalPath);
+  if (!logoUpload) {
+    throw new ApiError(500, "Failed to upload logo");
+  }
+
+  const teamData = {
+    teamName,
+    city,
+    managerEmail,
+    managerPhone,
+    hasPaid,
+    transactionId,
+    logo: logoUpload.url,
+  };
+
+  const event = await Event.findById(eventId);
+  if (!event) {
+    throw new ApiError(404, "Event not found");
+  }
+
+  event.registeredTeams.push(teamData);
+  await event.save();
+
+  return res.status(201).json(
+    new ApiResponse(201, teamData, "Team registered successfully!")
+  );
+});
+
+const getRegisteredTeams = asyncHandler(async (req, res) => {
+  const { eventId } = req.params;
+
+  const event = await Event.findById(eventId);
+  if (!event) {
+    throw new ApiError(404, "Event not found");
+  }
+
+  return res.status(200).json(
+    new ApiResponse(200, event.registeredTeams, "Registered teams fetched")
+  );
+});
+
+
+const editRegisteredTeam = asyncHandler(async (req, res) => {
+  const { eventId, teamId } = req.params;
+  const {
+    teamName,
+    city,
+    managerEmail,
+    managerPhone,
+    hasPaid,
+    transactionId,
+  } = req.body;
+
+  const event = await Event.findById(eventId);
+  if (!event) {
+    throw new ApiError(404, "Event not found");
+  }
+
+  const team = event.registeredTeams.id(teamId);
+  if (!team) {
+    throw new ApiError(404, "Team not found");
+  }
+
+  // Handle optional logo upload
+  if (req.files?.logo) {
+    const logoLocalPath = req.files.logo[0].path;
+    const uploadedLogo = await uploadOnCloudinary(logoLocalPath);
+    if (!uploadedLogo) {
+      throw new ApiError(500, "Failed to upload logo");
+    }
+    team.logo = uploadedLogo.url;
+  }
+
+  // Update fields
+  team.teamName = teamName || team.teamName;
+  team.city = city || team.city;
+  team.managerEmail = managerEmail || team.managerEmail;
+  team.managerPhone = managerPhone || team.managerPhone;
+  team.hasPaid = hasPaid !== undefined ? hasPaid : team.hasPaid;
+  team.transactionId = transactionId || team.transactionId;
+
+  await event.save();
+
+  return res.status(200).json(
+    new ApiResponse(200, team, "Team updated successfully")
+  );
+});
+
+
+
+module.exports = { postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam }

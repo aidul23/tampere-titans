@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { upload } = require("../middlewares/multer.middleware");
-const {postEvent, getAllEvents, deleteEvent, editEvent} = require("../controllers/event.controller");
+const {postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam} = require("../controllers/event.controller");
 
 const router = Router();
 
@@ -29,5 +29,15 @@ router.route("/events/:eventId").put(
   ]),
   editEvent
 );
+
+// register team for finn bangla
+router.post(
+  "/:eventId/register-team",
+  upload.fields([{ name: "logo", maxCount: 1 }]),
+  registerTeam
+);
+
+router.get("/:eventId/teams", getRegisteredTeams);
+router.put("/:eventId/teams/:teamId", editRegisteredTeam);
 
 module.exports = router
