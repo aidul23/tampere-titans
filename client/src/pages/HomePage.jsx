@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
@@ -61,9 +61,9 @@ const HomePage = () => {
           </p>
           <button
             onClick={() => navigate("/join")}
-            className="mt-6 px-6 py-3 bg-secondary text-black rounded-lg text-lg font-semibold hover:bg-accent hover:shadow-xl transition transform hover:scale-105"
+            className="mt-6 px-6 py-3 bg-secondary text-white rounded text-lg font-semibold hover:bg-primary hover:shadow-xl transition transform hover:scale-105"
           >
-            Join the Team
+            Join Us
           </button>
         </motion.div>
       </div>
@@ -117,7 +117,7 @@ const HomePage = () => {
         <h2 className="text-4xl font-bold mb-8 text-accent relative z-10">Events</h2>
         <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl px-4">
           {events.map((event) => (
-            <div key={event.id} className="bg-white p-4 rounded-xl shadow-md relative mt-4">
+            <div key={event._id} className="bg-white p-4 rounded-xl shadow-md relative mt-4">
               {/* Banner image */}
               <div
                 className="absolute top-0 left-0 right-0 h-60 rounded-t-xl"
@@ -134,46 +134,55 @@ const HomePage = () => {
                 <p className="text-gray-700 mt-2">📍 {event.location}</p>
                 <p className="text-gray-700">🗓️ {new Date(event.date).toLocaleDateString()} | 🕒 {new Date(event.date).toLocaleTimeString()}</p>
                 <Countdown
-  date={new Date(event.date).getTime()}
-  renderer={({ days, hours, minutes, seconds, completed }) => {
-    const eventDate = new Date(event.date);
-    const now = new Date();
+                  date={new Date(event.date).getTime()}
+                  renderer={({ days, hours, minutes, seconds, completed }) => {
+                    const eventDate = new Date(event.date);
+                    const now = new Date();
 
-    if (completed) {
-      // Check if it's *today* (event is starting now)
-      const isSameDay =
-        eventDate.toDateString() === now.toDateString();
+                    if (completed) {
+                      // Check if it's *today* (event is starting now)
+                      const isSameDay =
+                        eventDate.toDateString() === now.toDateString();
 
-      if (isSameDay) {
-        return (
-          <div className="absolute top-2 right-2 text-green-600 text-white text-sm px-3 py-1 rounded-full shadow-md z-20">
-          Finished
-        </div>
-        );
-      }
+                      if (isSameDay) {
+                        return (
+                          <div className="absolute top-2 right-2 text-green-600 text-white text-sm px-3 py-1 rounded-full shadow-md z-20">
+                            Finished
+                          </div>
+                        );
+                      }
 
-      // If the event was before today
-      return (
-        <div className="absolute top-2 right-2 bg-red-500 text-white text-sm px-3 py-1 rounded-full shadow-md z-20">
-          Finished
-        </div>
-      );
-    }
+                      // If the event was before today
+                      return (
+                        <div className="absolute top-2 right-2 bg-red-500 text-white text-sm px-3 py-1 rounded-full shadow-md z-20">
+                          Finished
+                        </div>
+                      );
+                    }
 
-    // Default countdown timer (upcoming)
-    return (
-      <p className="text-gray-700 m-2">
-        <span className="text-4xl font-bold">
-          {days} : {hours} : {minutes} : {seconds}
-        </span>
-        <br />
-        <span className="text-sm font-semibold text-accent">
-          Time Left
-        </span>
-      </p>
-    );
-  }}
-/>
+                    // Default countdown timer (upcoming)
+                    return (
+                      <p className="text-gray-700 m-2">
+                        <span className="text-2xl font-bold">
+                          {days} : {hours} : {minutes} : {seconds}
+                        </span>
+                        <br />
+                        <span className="text-sm font-semibold text-accent">
+                          Time Left
+                        </span>
+                      </p>
+                    );
+                  }}
+                />
+
+                {new Date() < new Date(event.registrationDeadline) && (
+                  <button
+                    onClick={() => navigate(`/events/${event._id}/register`)}
+                    className="mt-2 bg-secondary text-white px-4 py-2 rounded shadow hover:bg-primary transition"
+                  >
+                    Register Now
+                  </button>
+                )}
 
               </div>
             </div>

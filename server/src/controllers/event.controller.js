@@ -7,6 +7,9 @@ const { uploadOnCloudinary } = require("../utils/cloudinary");
 const postEvent = asyncHandler(async (req, res) => {
   // Destructure the required fields from the request body
   const { title, description, date, location } = req.body;
+  let { registrationDeadline } = req.body;
+
+  registrationDeadline = registrationDeadline || null;
 
 
   // Handle image upload (player image/avatar)
@@ -25,6 +28,7 @@ const postEvent = asyncHandler(async (req, res) => {
   const event = await Event.create({
     title,
     date,
+    registrationDeadline,
     location,
     description,
     image: image.url, // Store image URL
@@ -50,7 +54,7 @@ const getAllEvents = asyncHandler(async (req, res) => {
 
 const editEvent = asyncHandler(async (req, res) => {
   const { eventId } = req.params;
-  const { title, description, date, location } = req.body;
+  const { title, description, date, location, registrationDeadline } = req.body;
 
   // Check if the event exists
   const event = await Event.findById(eventId);
@@ -58,7 +62,7 @@ const editEvent = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Event not found");
   }
 
-  // Update the title, description, and possibly the image (if provided)
+  // Handle image update if a new one is uploaded
   if (req.files?.image) {
     const imageLocalPath = req.files.image[0].path;
     const image = await uploadOnCloudinary(imageLocalPath);
@@ -68,16 +72,26 @@ const editEvent = asyncHandler(async (req, res) => {
     event.image = image.url;
   }
 
+  // Update fields if provided
   event.title = title || event.title;
   event.description = description || event.description;
   event.date = date || event.date;
   event.location = location || event.location;
 
-  // Save the updated event
+  // Handle registrationDeadline (optional)
+  event.registrationDeadline =
+    registrationDeadline !== undefined
+      ? registrationDeadline || null
+      : event.registrationDeadline;
+
+  // Save changes
   await event.save();
 
-  return res.status(200).json(new ApiResponse(200, event, "Event updated successfully"));
+  return res
+    .status(200)
+    .json(new ApiResponse(200, event, "Event updated successfully"));
 });
+
 
 const deleteEvent = asyncHandler(async (req, res) => {
   const { eventId } = req.params;

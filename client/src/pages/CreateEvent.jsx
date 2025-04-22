@@ -10,9 +10,11 @@ const CreateEvent = () => {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [date, setDate] = useState(new Date());
+  const [registrationDeadline, setRegistrationDeadline] = useState(new Date());
   const [image, setImage] = useState(null);
   const [previewUrl, setPreviewUrl] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [hasDeadline, setHasDeadline] = useState(false);
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -33,6 +35,9 @@ const CreateEvent = () => {
     formData.append("description", description);
     formData.append("location", location);
     formData.append("date", date.toISOString());
+    if (hasDeadline) {
+      formData.append("registrationDeadline", registrationDeadline.toISOString());
+    }
     formData.append("image", image);
 
     try {
@@ -100,6 +105,31 @@ const CreateEvent = () => {
             dateFormat="MMMM d, yyyy h:mm aa"
             className="w-full p-3 border border-gray-300 rounded-lg"
           />
+        </div>
+
+
+        {hasDeadline && (
+          <div className="mb-4">
+            <label className="block mb-1 font-medium">Registration Deadline</label>
+            <DatePicker
+              selected={registrationDeadline}
+              onChange={(registrationDeadline) => setRegistrationDeadline(registrationDeadline)}
+              showTimeSelect
+              timeFormat="HH:mm"
+              timeIntervals={15}
+              dateFormat="MMMM d, yyyy h:mm aa"
+              className="w-full p-3 border border-gray-300 rounded-lg"
+            />
+          </div>
+        )}
+        <div className="mb-4 flex items-center space-x-2">
+          <input
+            type="checkbox"
+            id="enableDeadline"
+            checked={hasDeadline}
+            onChange={(e) => setHasDeadline(e.target.checked)}
+          />
+          <label htmlFor="enableDeadline" className="font-medium">Enable Registration Deadline</label>
         </div>
 
         <input type="file" accept="image/*" onChange={handleImageChange} className="mb-4 w-full" />

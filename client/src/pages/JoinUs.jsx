@@ -206,7 +206,7 @@ const JoinUs = () => {
         type="submit"
         className="w-full bg-secondary text-black font-bold py-3 rounded-xl hover:bg-accent transition text-lg"
       >
-        {loading ? "Submitting..." : "Submit Application"}
+        {loading ? "Submitting..." : "Submit"}
       </button>
     </form>
   </div>
