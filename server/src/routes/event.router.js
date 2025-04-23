@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { upload } = require("../middlewares/multer.middleware");
-const {postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam} = require("../controllers/event.controller");
+const {postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam, deleteRegisteredTeam} = require("../controllers/event.controller");
 
 const router = Router();
 
@@ -39,5 +39,6 @@ router.post(
 
 router.get("/:eventId/teams", getRegisteredTeams);
 router.put("/:eventId/teams/:teamId", editRegisteredTeam);
+router.delete("/:eventId/teams/:teamId", deleteRegisteredTeam);
 
 module.exports = router

@@ -70,7 +70,7 @@ const EventRegistration = () => {
             });
 
             if (response.status === 201) {
-                toast.success("Team registration successful!");
+                toast.success("Team registration successful! Now wait for organizer approval");
                 setFormData({
                     teamName: "",
                     logo: null,
@@ -232,7 +232,7 @@ const EventRegistration = () => {
                         <label className="absolute left-4 top-1.5 bg-white px-1 text-sm text-gray-500 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all">
                             Manager Email
                         </label>
-                        <p className="text-sm text-gray-500 mt-1 italic">
+                        <p className="text-xs text-gray-500 mt-1 italic">
                             *Please enter a valid email — we’ll send important updates here.
                         </p>
                     </div>
@@ -251,7 +251,7 @@ const EventRegistration = () => {
                         <label className="absolute left-4 top-1.5 bg-white px-1 text-sm text-gray-500 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all">
                             Manager Phone Number
                         </label>
-                        <p className="text-sm text-gray-500 mt-1 italic">
+                        <p className="text-xs text-gray-500 mt-1 italic">
                             *Please enter a valid phone number — we’ll send important updates here.
                         </p>
                     </div>
@@ -318,6 +318,9 @@ const EventRegistration = () => {
                             <label className="absolute left-4 top-1.5 bg-white px-1 text-sm text-gray-500 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all">
                                 Transaction ID
                             </label>
+                            <p className="text-xs text-gray-500 mt-1 italic">
+                                *Give payment transaction id or code.
+                            </p>
                         </div>
                     </div>
 

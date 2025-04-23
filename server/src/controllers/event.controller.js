@@ -176,6 +176,7 @@ const editRegisteredTeam = asyncHandler(async (req, res) => {
     managerEmail,
     managerPhone,
     hasPaid,
+    isApproved,
     transactionId,
   } = req.body;
 
@@ -205,6 +206,7 @@ const editRegisteredTeam = asyncHandler(async (req, res) => {
   team.managerEmail = managerEmail || team.managerEmail;
   team.managerPhone = managerPhone || team.managerPhone;
   team.hasPaid = hasPaid !== undefined ? hasPaid : team.hasPaid;
+  team.isApproved = isApproved !== undefined ? isApproved : team.isApproved;
   team.transactionId = transactionId || team.transactionId;
 
   await event.save();
@@ -214,6 +216,27 @@ const editRegisteredTeam = asyncHandler(async (req, res) => {
   );
 });
 
+const deleteRegisteredTeam = asyncHandler(async (req, res) => {
+  const { eventId, teamId } = req.params;
+
+  const event = await Event.findById(eventId);
+  if (!event) {
+    throw new ApiError(404, "Event not found");
+  }
+
+  const team = event.registeredTeams.id(teamId);
+  if (!team) {
+    throw new ApiError(404, "Team not found");
+  }
+
+  event.registeredTeams.pull({ _id: teamId }); // Remove the team from the array using pull
+  await event.save();
+
+  return res.status(200).json(
+    new ApiResponse(200, null, "Team deleted successfully")
+  );
+});
 
 
-module.exports = { postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam }
+
+module.exports = { postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam, deleteRegisteredTeam }

@@ -22,10 +22,12 @@ import PostAchievement from "./pages/PostAchievement";
 import CreateEvent from "./pages/CreateEvent";
 import EventRegistration from "./pages/EventRegistration";
 import EventDetails from "./pages/EventDetails";
+import ScroolToTop from "./pages/ScrollToTop";
 
 function App() {
   return (
     <Router>
+      <ScroolToTop />
       <Navbar />
       <Routes>
         <Route path="/" element={<HomePage />} />
