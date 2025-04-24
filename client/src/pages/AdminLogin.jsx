@@ -14,26 +14,22 @@ function AdminLogin() {
 
         try {
             const response = await api.post("/login", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, password }),
+                email,
+                password,
             });
 
-            const data = await response.json();
-
             if (response.status === 200) {
-                // If login is successful, navigate to the admin dashboard
                 localStorage.setItem("isAdminAuthenticated", "true");
                 localStorage.setItem("loginTime", new Date().toISOString());
                 navigate("/admin-dashboard");
-            } else {
-                // Show error if credentials are invalid
-                setError(data.error);
             }
         } catch (err) {
-            setError("An error occurred. Please try again.");
+            // Axios errors are caught here
+            if (err.response && err.response.status === 401) {
+                setError("Invalid credentials");
+            } else {
+                setError("An error occurred. Please try again.");
+            }
         }
     };
 
