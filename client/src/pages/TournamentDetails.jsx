@@ -42,12 +42,12 @@ const tournamentData = {
         ],
         image: "/src/assets/tfm.png",
         pointsTable: [
-            { position: 1, team: "Sylhet Stallions", played: 5, won: 4, draw: 1, lost: 0, points: 13 },
-            { position: 2, team: "Khulna Knights", played: 5, won: 3, draw: 1, lost: 1, points: 10 },
-            { position: 3, team: "Rajshahi Renegades", played: 5, won: 2, draw: 2, lost: 1, points: 8 },
-            { position: 4, team: "Chattogram Cobras", played: 5, won: 2, draw: 1, lost: 2, points: 7 },
-            { position: 5, team: "Barishal Blasters", played: 5, won: 1, draw: 1, lost: 3, points: 4 },
-            { position: 6, team: "Dhaka Dragons", played: 5, won: 0, draw: 2, lost: 3, points: 2 },
+            { position: 1, team: "Barishal Blasters", played: 5, won: 4, draw: 1, lost: 0, points: 13 },
+            { position: 2, team: "Chattogram Cobras", played: 5, won: 3, draw: 1, lost: 1, points: 10 },
+            { position: 3, team: "Rajshahi Renegades", played: 4, won: 2, draw: 1, lost: 2, points: 8 },
+            { position: 4, team: "Khulna Knights", played: 4, won: 2, draw: 1, lost: 2, points: 7 },
+            { position: 5, team: "Sylhet Stallions", played: 3, won: 1, draw: 1, lost: 1, points: 2 },
+            { position: 6, team: "Dhaka Dragons", played: 3, won: 0, draw: 1, lost: 2, points: 1 },
         ],
         fixtures: [
             { date: "September 7, 2024", time: "12:00", venue: "Ahvenisjärvi Soccer Fields", team1: "Chattogram Cobras", team2: "Dhaka Dragons" },
@@ -61,16 +61,14 @@ const tournamentData = {
             { date: "September 7, 2024", time: "16:15", venue: "Ahvenisjärvi Soccer Fields", team1: "Khulna Knights", team2: "Dhaka Dragons" },
         ],
         playerStats: [
-            { name: "John Doe", team: "Sylhet Stallions", goals: 5, assists: 3, matches: 4 },
-            { name: "Jane Smith", team: "Khulna Knights", goals: 3, assists: 4, matches: 5 },
-            { name: "Ali Khan", team: "Rajshahi Renegades", goals: 4, assists: 2, matches: 3 },
+
         ],
         matches: [
             {
                 date: "September 7, 2024",
                 time: "12:00",
                 team1: { name: "Chattogram Cobras", flag: "/src/assets/chattogram.jpg", score: 0, scorer: [] },
-                team2: { name: "Dhaka Dragons", flag: "/src/assets/dhaka.jpg", score: 2, scorer: ["Puspo","Walid"] },
+                team2: { name: "Dhaka Dragons", flag: "/src/assets/dhaka.jpg", score: 2, scorer: ["Puspo", "Walid"] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -83,7 +81,7 @@ const tournamentData = {
                 date: "September 7, 2024",
                 time: "12:00",
                 team1: { name: "Sylhet Stallions", flag: "/src/assets/sylhet.jpg", score: 1, scorer: ["Khamza"] },
-                team2: { name: "Barishal Blasters", flag: "/src/assets/barisal.jpg", score: 2, scorer: ["Ashik","Khabir"] },
+                team2: { name: "Barishal Blasters", flag: "/src/assets/barisal.jpg", score: 2, scorer: ["Ashik", "Khabir"] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -148,7 +146,7 @@ const tournamentData = {
                 date: "September 7, 2024",
                 time: "14:15",
                 team1: { name: "Chattogram Cobras", flag: "/src/assets/chattogram.jpg", score: 1, scorer: ["Puspo"] },
-                team2: { name: "Barishal Blasters", flag: "/src/assets/barisal.jpg", score: 3, scorer: ["Tabiq","Tabiq","Ashiq"] },
+                team2: { name: "Barishal Blasters", flag: "/src/assets/barisal.jpg", score: 3, scorer: ["Tabiq", "Tabiq", "Ashiq"] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -266,7 +264,7 @@ const TournamentDetails = () => {
                         <div className="flex flex-wrap gap-6 justify-center mt-6 shadow-lg rounded-lg hover:shadow-xl">
 
                         </div>
-                        
+
                     </div>
                 )}
                 {activeTab === "fixtures" && (
@@ -313,7 +311,19 @@ const TournamentDetails = () => {
                                 {tournament.pointsTable.map((team, index) => (
                                     <tr key={index} className="border-b hover:bg-gray-100">
                                         <td className="px-4 py-2 font-semibold">{team.position}</td>
-                                        <td className="px-4 py-2">{team.team}</td>
+                                        <td className="px-4 py-2">
+                                            {team.team}
+                                            {index === 0 && (
+                                                <span className="ml-2 inline-block text-white text-xl px-2 py-1">
+                                                    🥇
+                                                </span>
+                                            )}
+                                            {index === 1 && (
+                                                <span className="ml-2 inline-block text-white text-lg px-2 py-1">
+                                                    🥈
+                                                </span>
+                                            )}
+                                        </td>
                                         <td className="px-4 py-2">{team.played}</td>
                                         <td className="px-4 py-2">{team.won}</td>
                                         <td className="px-4 py-2">{team.draw}</td>
@@ -325,6 +335,7 @@ const TournamentDetails = () => {
                         </table>
                     </div>
                 )}
+
                 {activeTab === "matches" && (
                     <div className="mt-6">
                         <h2 className="text-2xl font-semibold mb-4">Match Results</h2>
@@ -346,18 +357,26 @@ const TournamentDetails = () => {
                                     <th className="py-2 px-4">Matches</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                                {tournament.playerStats.map((player, index) => (
-                                    <tr key={index} className="text-center border-b">
-                                        <td className="py-2 px-4">{player.name}</td>
-                                        <td className="py-2 px-4">{player.team}</td>
-                                        <td className="py-2 px-4">{player.goals}</td>
-                                        <td className="py-2 px-4">{player.assists}</td>
-                                        <td className="py-2 px-4">{player.matches}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
+
+                            {tournament.playerStats.length > 0 ? (
+                                <tbody>
+                                    {tournament.playerStats.map((player, index) => (
+                                        <tr key={index} className="text-center border-b">
+                                            <td className="py-2 px-4">{player.name}</td>
+                                            <td className="py-2 px-4">{player.team}</td>
+                                            <td className="py-2 px-4">{player.goals}</td>
+                                            <td className="py-2 px-4">{player.assists}</td>
+                                            <td className="py-2 px-4">{player.matches}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            ) : null}
                         </table>
+
+                        {tournament.playerStats.length === 0 && (
+                            <p className="text-xl text-center font-semibold mt-4">No Data Available</p>
+                        )}
+
                     </div>
                 )}
             </div>
