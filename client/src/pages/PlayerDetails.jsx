@@ -147,7 +147,7 @@ const PlayerDetails = () => {
         <div className="w-full grid grid-cols-3 gap-6 mt-8">
           <div className="text-primary p-6 rounded-xl shadow-md flex flex-col items-center relative">
             {/* Background Icon */}
-            <div className="absolute left-0 top-10 bottom-0 p-6 bg-cover bg-no-repeat opacity-30" style={{ backgroundImage: "url('/src/assets/goal.png')", backgroundPosition: "left center", backgroundSize: "50px 50px" }}></div>
+            <div className="absolute left-0 top-10 bottom-0 p-6 bg-cover bg-no-repeat opacity-30" style={{ backgroundImage: "url('/assets/goal.png')", backgroundPosition: "left center", backgroundSize: "50px 50px" }}></div>
             {/* Content */}
             <h3 className="text-2xl font-bold mb-2">Goals</h3>
             <p className="text-3xl font-bold text-yellow-500">{player.stats.goals}</p>
@@ -155,7 +155,7 @@ const PlayerDetails = () => {
 
           <div className="text-primary p-6 rounded-xl shadow-md flex flex-col items-center relative">
             {/* Background Icon */}
-            <div className="absolute left-0 top-10 bottom-0 p-6 bg-cover bg-no-repeat opacity-30" style={{ backgroundImage: "url('/src/assets/passing.png')", backgroundPosition: "left center", backgroundSize: "50px 50px" }}></div>
+            <div className="absolute left-0 top-10 bottom-0 p-6 bg-cover bg-no-repeat opacity-30" style={{ backgroundImage: "url('/assets/passing.png')", backgroundPosition: "left center", backgroundSize: "50px 50px" }}></div>
             {/* Content */}
             <h3 className="text-2xl font-bold mb-2">Assists</h3>
             <p className="text-3xl font-bold text-yellow-500">{player.stats.assists}</p>
@@ -163,7 +163,7 @@ const PlayerDetails = () => {
 
           <div className="text-primary p-6 rounded-xl shadow-md flex flex-col items-center relative">
             {/* Background Icon */}
-            <div className="absolute left-0 top-10 m-2 bottom-0 p-8 bg-cover bg-no-repeat opacity-30" style={{ backgroundImage: "url('/src/assets/football-court.png')", backgroundPosition: "left center", backgroundSize: "50px 50px" }}></div>
+            <div className="absolute left-0 top-10 m-2 bottom-0 p-8 bg-cover bg-no-repeat opacity-30" style={{ backgroundImage: "url('/assets/football-court.png')", backgroundPosition: "left center", backgroundSize: "50px 50px" }}></div>
             {/* Content */}
             <h3 className="text-2xl font-bold mb-2">Matches Played</h3>
             <p className="text-3xl font-bold text-yellow-500">{player.stats.matchesPlayed}</p>
