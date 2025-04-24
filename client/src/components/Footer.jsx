@@ -40,21 +40,21 @@ const Footer = () => {
           <div className="flex justify-center gap-1">
             <a href="https://sponsor1.com" target="_blank" rel="noopener noreferrer">
               <img
-                src="/src/assets/sponsor-1.png"
+                src="/assets/sponsor-1.png"
                 alt="Sponsor 1"
                 className="w-32 h-12 object-contain hover:opacity-80 transition"
               />
             </a>
             <a href="https://sponsor2.com" target="_blank" rel="noopener noreferrer">
               <img
-                src="/src/assets/sponsor-2.png"
+                src="/assets/sponsor-2.png"
                 alt="Sponsor 2"
                 className="w-32 h-12 object-contain hover:opacity-80 transition"
               />
             </a>
             <a href="https://sponsor3.com" target="_blank" rel="noopener noreferrer">
               <img
-                src="/src/assets/sponsor-3.png"
+                src="/assets/sponsor-3.png"
                 alt="Sponsor 3"
                 className="w-32 h-12 object-contain hover:opacity-80 transition"
               />

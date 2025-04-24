@@ -91,7 +91,7 @@ const JoinUs = () => {
       {/* Left Side: Image and Text */}
       <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 text-center">
         <img
-          src="/src/assets/team_logo.png"
+          src="/assets/team_logo.png"
           alt="Join the Team"
           className="w-60 max-w-md mb-6"
         />

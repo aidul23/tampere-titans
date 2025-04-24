@@ -7,7 +7,7 @@ const tournaments = [
     name: "Tampere Football Mania",
     date: "September 7, 2024",
     location: "Ahvenisjärvi Soccer Fields",
-    image: "src/assets/tournament.jpg",
+    image: "/assets/tournament.jpg",
     isLive: false
   },
 ];

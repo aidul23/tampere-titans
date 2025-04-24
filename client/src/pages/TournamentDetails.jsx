@@ -40,7 +40,7 @@ const tournamentData = {
                 image: "/src/assets/dhaka.jpg"
             }
         ],
-        image: "/src/assets/tfm.png",
+        image: "/assets/tfm.png",
         pointsTable: [
             { position: 1, team: "Barishal Blasters", played: 5, won: 4, draw: 1, lost: 0, points: 13 },
             { position: 2, team: "Chattogram Cobras", played: 5, won: 3, draw: 1, lost: 1, points: 10 },
@@ -67,8 +67,8 @@ const tournamentData = {
             {
                 date: "September 7, 2024",
                 time: "12:00",
-                team1: { name: "Chattogram Cobras", flag: "/src/assets/chattogram.jpg", score: 0, scorer: [] },
-                team2: { name: "Dhaka Dragons", flag: "/src/assets/dhaka.jpg", score: 2, scorer: ["Puspo", "Walid"] },
+                team1: { name: "Chattogram Cobras", flag: "/assets/chattogram.jpg", score: 0, scorer: [] },
+                team2: { name: "Dhaka Dragons", flag: "/assets/dhaka.jpg", score: 2, scorer: ["Puspo", "Walid"] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -80,8 +80,8 @@ const tournamentData = {
             {
                 date: "September 7, 2024",
                 time: "12:00",
-                team1: { name: "Sylhet Stallions", flag: "/src/assets/sylhet.jpg", score: 1, scorer: ["Khamza"] },
-                team2: { name: "Barishal Blasters", flag: "/src/assets/barisal.jpg", score: 2, scorer: ["Ashik", "Khabir"] },
+                team1: { name: "Sylhet Stallions", flag: "/assets/sylhet.jpg", score: 1, scorer: ["Khamza"] },
+                team2: { name: "Barishal Blasters", flag: "/assets/barisal.jpg", score: 2, scorer: ["Ashik", "Khabir"] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -93,8 +93,8 @@ const tournamentData = {
             {
                 date: "September 7, 2024",
                 time: "12:45",
-                team1: { name: "Khulna Knights", flag: "/src/assets/khulna.jpg", score: 1, scorer: ["Nahid"] },
-                team2: { name: "Rajshahi Renegades", flag: "/src/assets/rajshahi.jpg", score: 1, scorer: ["Tonoy"] },
+                team1: { name: "Khulna Knights", flag: "/assets/khulna.jpg", score: 1, scorer: ["Nahid"] },
+                team2: { name: "Rajshahi Renegades", flag: "/assets/rajshahi.jpg", score: 1, scorer: ["Tonoy"] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -106,8 +106,8 @@ const tournamentData = {
             {
                 date: "September 7, 2024",
                 time: "13:30",
-                team1: { name: "Sylhet Stallions", flag: "/src/assets/sylhet.jpg", score: 1, scorer: ["Wahid"] },
-                team2: { name: "Dhaka Dragons", flag: "/src/assets/dhaka.jpg", score: 0, scorer: [] },
+                team1: { name: "Sylhet Stallions", flag: "/assets/sylhet.jpg", score: 1, scorer: ["Wahid"] },
+                team2: { name: "Dhaka Dragons", flag: "/assets/dhaka.jpg", score: 0, scorer: [] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -119,8 +119,8 @@ const tournamentData = {
             {
                 date: "September 7, 2024",
                 time: "14:15",
-                team1: { name: "Chattogram Cobras", flag: "/src/assets/chattogram.jpg", score: 4, scorer: ["Hammad Shahid Khan", "Hammad Shahid Khan", "Puspo", "Walid"] },
-                team2: { name: "Rajshahi Renegades", flag: "/src/assets/rajshahi.jpg", score: 1, scorer: ["Sajib Sharma"] },
+                team1: { name: "Chattogram Cobras", flag: "/assets/chattogram.jpg", score: 4, scorer: ["Hammad Shahid Khan", "Hammad Shahid Khan", "Puspo", "Walid"] },
+                team2: { name: "Rajshahi Renegades", flag: "/assets/rajshahi.jpg", score: 1, scorer: ["Sajib Sharma"] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -132,8 +132,8 @@ const tournamentData = {
             {
                 date: "September 7, 2024",
                 time: "14:15",
-                team1: { name: "Khulna Knights", flag: "/src/assets/khulna.jpg", score: 0, scorer: [] },
-                team2: { name: "Barishal Blasters", flag: "/src/assets/barisal.jpg", score: 0, scorer: [] },
+                team1: { name: "Khulna Knights", flag: "/assets/khulna.jpg", score: 0, scorer: [] },
+                team2: { name: "Barishal Blasters", flag: "/assets/barisal.jpg", score: 0, scorer: [] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -145,8 +145,8 @@ const tournamentData = {
             {
                 date: "September 7, 2024",
                 time: "14:15",
-                team1: { name: "Chattogram Cobras", flag: "/src/assets/chattogram.jpg", score: 1, scorer: ["Puspo"] },
-                team2: { name: "Barishal Blasters", flag: "/src/assets/barisal.jpg", score: 3, scorer: ["Tabiq", "Tabiq", "Ashiq"] },
+                team1: { name: "Chattogram Cobras", flag: "/assets/chattogram.jpg", score: 1, scorer: ["Puspo"] },
+                team2: { name: "Barishal Blasters", flag: "/assets/barisal.jpg", score: 3, scorer: ["Tabiq", "Tabiq", "Ashiq"] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -158,8 +158,8 @@ const tournamentData = {
             {
                 date: "September 7, 2024",
                 time: "16:15",
-                team1: { name: "Dhaka Dragons", flag: "/src/assets/dhaka.jpg", score: 0, scorer: [] },
-                team2: { name: "Khulna Knights", flag: "/src/assets/khulna.jpg", score: 0, scorer: [] },
+                team1: { name: "Dhaka Dragons", flag: "/assets/dhaka.jpg", score: 0, scorer: [] },
+                team2: { name: "Khulna Knights", flag: "/assets/khulna.jpg", score: 0, scorer: [] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {
@@ -171,8 +171,8 @@ const tournamentData = {
             {
                 date: "September 7, 2024",
                 time: "16:15",
-                team1: { name: "Sylhet Stallions", flag: "/src/assets/sylhet.jpg", score: 0, scorer: [] },
-                team2: { name: "Rajshahi Renegades", flag: "/src/assets/rajshahi.jpg", score: 0, scorer: [] },
+                team1: { name: "Sylhet Stallions", flag: "/assets/sylhet.jpg", score: 0, scorer: [] },
+                team2: { name: "Rajshahi Renegades", flag: "/assets/rajshahi.jpg", score: 0, scorer: [] },
                 status: "Finished",
                 venue: "Ahvenisjärvi Soccer Fields",
                 stats: {

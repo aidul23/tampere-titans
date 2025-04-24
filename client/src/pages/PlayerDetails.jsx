@@ -105,7 +105,7 @@ const PlayerDetails = () => {
             {player.isCaptain && (
               <div className="bg-primary text-white px-3 py-2 rounded-full text-sm font-bold flex items-center space-x-1 self-start">
                 <img
-                  src="/src/assets/captain-band.png"
+                  src="/assets/captain-band.png"
                   alt="Captain Band"
                   className="w-5 h-5 object-cover"
                 />
@@ -120,7 +120,7 @@ const PlayerDetails = () => {
             <div className="flex flex-col mt-2 space-y-2">
               <div className="text-primary flex items-center space-x-2">
                 <img
-                  src="/src/assets/football-boots.png"
+                  src="/assets/football-boots.png"
                   alt="Position"
                   className="w-5 h-5 object-cover"
                 />
@@ -128,7 +128,7 @@ const PlayerDetails = () => {
               </div>
               <div className="text-primary flex items-center space-x-2">
                 <img
-                  src="/src/assets/jersey.png"
+                  src="/assets/jersey.png"
                   alt="Jersey"
                   className="w-5 h-5 object-cover"
                 />
@@ -182,7 +182,7 @@ const PlayerDetails = () => {
             <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
               {player.achievements.map((achievement, index) => (
                 <div key={index} className="bg-gradient-to-br from-yellow-400 to-yellow-600 text-black p-4 rounded-xl shadow-lg flex flex-col items-center text-center">
-                  <img src="/src/assets/award-symbol.png" alt="Trophy" className="w-12 h-12 mb-3" />
+                  <img src="/assets/award-symbol.png" alt="Trophy" className="w-12 h-12 mb-3" />
                   <h4 className="font-bold text-lg text-primary">{achievement.title}</h4>
                   <p className="text-sm mt-1">{achievement.tournament}</p>
                 </div>

@@ -94,7 +94,7 @@ const EventRegistration = () => {
             <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 text-center">
 
                 <img
-                    src="/src/assets/team_logo.png"
+                    src="/assets/team_logo.png"
                     alt="Event Registration"
                     className="w-60 max-w-md mb-6"
                 />
@@ -141,7 +141,7 @@ const EventRegistration = () => {
                         {/* Aqib Card */}
                         <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20 shadow-md text-white flex flex-col items-center">
                             <img
-                                src="/src/assets/sium.jpg"
+                                src="/assets/sium.jpg"
                                 alt="Aqib Hassan"
                                 className="w-20 h-20 object-cover rounded-full border-2 border-white mb-3"
                             />
@@ -158,7 +158,7 @@ const EventRegistration = () => {
                         {/* Asif Card */}
                         <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20 shadow-md text-white flex flex-col items-center">
                             <img
-                                src="/src/assets/asif.jpg"
+                                src="/assets/asif.jpg"
                                 alt="Asif Ahmed"
                                 className="w-20 h-20 object-cover rounded-full border-2 border-white mb-3"
                             />

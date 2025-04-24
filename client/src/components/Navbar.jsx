@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react"; // Import icons
-import logo from "/src/assets/team_logo.png"; // Replace with actual logo
+import logo from "/assets/team_logo.png"; // Replace with actual logo
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);

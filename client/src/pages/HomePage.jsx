@@ -42,7 +42,7 @@ const HomePage = () => {
       {/* Hero Section with Background Image */}
       <div
         className="relative min-h-screen flex flex-col items-center justify-center bg-gradient-to-b from-primary via-primary/60 to-primary/30 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/src/assets/team_photo.jpeg')" }}
+        style={{ backgroundImage: "url('/assets/team_photo.jpeg')" }}
       >
         {/* Dark Overlay */}
         <div className="absolute inset-0 bg-primary/70 z-10"></div>
@@ -75,7 +75,7 @@ const HomePage = () => {
         <div
           className="absolute top-0 bottom-0 right-0 w-[50vw] bg-no-repeat bg-cover bg-center"
           style={{
-            backgroundImage: "url('/src/assets/trophy.png')",
+            backgroundImage: "url('/assets/trophy.png')",
             transform: 'translateX(50%)', // Push half out of the screen
             opacity: '0.3',
           }}
@@ -106,7 +106,7 @@ const HomePage = () => {
         <div
           className="absolute top-0 bottom-0 left-0 w-[50vw] bg-no-repeat bg-cover bg-center"
           style={{
-            backgroundImage: "url('/src/assets/ball-net.png')",
+            backgroundImage: "url('/assets/ball-net.png')",
             transform: 'translateX(-20%)', // Push half out of the screen to the left
             opacity: '0.2',
           }}

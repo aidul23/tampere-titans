@@ -41,7 +41,7 @@ const AboutPage = () => {
           >
             <SwiperSlide>
               <img
-                src="/src/assets/team_photo.jpeg"
+                src="/assets/team_photo.jpeg"
                 alt="Team"
                 className="w-full object-cover rounded-lg"
               />
