@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Masonry from "react-masonry-css";
 import { ImSpinner2 } from "react-icons/im"; // Spinner icon from react-icons
+import api from "../helpers/api";
 
 const Activity = () => {
   const [activities, setActivities] = useState([]);
@@ -11,9 +12,8 @@ const Activity = () => {
     const fetchActivities = async () => {
       try {
         setLoading(true); // Start loading
-        const response = await fetch("http://localhost:8000/api/v1/activity/activities");
-        const data = await response.json();
-        setActivities(data);
+        const response = await api.get("/activity/activities");
+        setActivities(response.data);
       } catch (error) {
         console.error("Error fetching activities:", error);
       } finally {

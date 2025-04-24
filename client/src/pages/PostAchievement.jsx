@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify"; // Import toastify
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import api from "../helpers/api";
 
 const PostAchievement = () => {
   const [uploading, setUploading] = useState(false);
@@ -17,7 +18,7 @@ const PostAchievement = () => {
 
     try {
       setUploading(true);
-      const response = await axios.post("http://localhost:8000/api/v1/achievement/",{
+      const response = await api.post("/achievement/",{
         title: title,
         description: description
       });

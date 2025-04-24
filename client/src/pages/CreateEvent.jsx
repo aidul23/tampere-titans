@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-toastify/dist/ReactToastify.css";
+import api from "../helpers/api";
 
 const CreateEvent = () => {
   const [title, setTitle] = useState("");
@@ -42,7 +43,7 @@ const CreateEvent = () => {
 
     try {
       setUploading(true);
-      const response = await axios.post("http://localhost:8000/api/v1/event", formData, {
+      const response = await api.post("/event", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
 

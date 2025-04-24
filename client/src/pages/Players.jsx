@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import api from "../helpers/api";
 
 const Players = () => {
   const [players, setPlayers] = useState([]);
@@ -8,9 +9,8 @@ const Players = () => {
   useEffect(() => {
     const fetchPlayers = async () => {
       try {
-        const response = await fetch("http://localhost:8000/api/v1/players/approved");
-        const data = await response.json();
-        setPlayers(data.players); // Assuming API response contains a "players" array
+        const response = await api.get("/players/approved");
+        setPlayers(response.data.players); // Assuming API response contains a "players" array
       } catch (error) {
         console.error("Error fetching players:", error);
       }

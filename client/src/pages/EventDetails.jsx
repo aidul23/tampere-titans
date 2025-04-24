@@ -1,6 +1,7 @@
 import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import api from "../helpers/api";
 
 const EventDetails = () => {
     const { id } = useParams();
@@ -18,7 +19,7 @@ const EventDetails = () => {
 
     useEffect(() => {
         if (!event) {
-            axios.get(`http://localhost:8000/api/v1/event/${id}`)
+            api.get(`/event/${id}`)
                 .then(res => setEvent(res.data.data))
                 .catch(err => console.error("Event fetch error", err));
         }
@@ -28,7 +29,7 @@ const EventDetails = () => {
 
     const fetchTeams = async () => {
         try {
-            const res = await axios.get(`http://localhost:8000/api/v1/event/${id}/teams`);
+            const res = await api.get(`/event/${id}/teams`);
             setTeams(res.data.data);
         } catch (err) {
             console.error("Team fetch error", err);
@@ -49,7 +50,7 @@ const EventDetails = () => {
             formData.append('date', editEventForm.date);
             if (newImage) formData.append('image', newImage);
 
-            const res = await axios.put(`http://localhost:8000/api/v1/event/events/${id}`, formData);
+            const res = await api.put(`/event/events/${id}`, formData);
             setEvent(res.data.data);
             setEditEventMode(false);
             setNewImage(null);
@@ -68,7 +69,7 @@ const EventDetails = () => {
 
     const handleTeamUpdate = async (teamId) => {
         try {
-            await axios.put(`http://localhost:8000/api/v1/event/${id}/teams/${teamId}`, teamEditForm);
+            await api.put(`/event/${id}/teams/${teamId}`, teamEditForm);
             setEditingTeamId(null);
             fetchTeams(); // Refresh
         } catch (err) {
@@ -79,7 +80,7 @@ const EventDetails = () => {
     const handleTeamDelete = async (teamId) => {
         if (!window.confirm("Are you sure you want to delete this team?")) return;
         try {
-            await axios.delete(`http://localhost:8000/api/v1/event/${id}/teams/${teamId}`);
+            await api.delete(`/event/${id}/teams/${teamId}`);
             fetchTeams(); // Refresh the list
         } catch (err) {
             console.error("Failed to delete team", err);

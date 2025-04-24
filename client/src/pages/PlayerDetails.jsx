@@ -3,16 +3,19 @@ import { useParams } from "react-router-dom";
 import { ImSpinner2 } from "react-icons/im";
 import { Bar } from "react-chartjs-2";
 import { Radar } from "react-chartjs-2";
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, RadialLinearScale,
-    PointElement,
-    LineElement,
-    Filler, } from "chart.js";
+import {
+  Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, RadialLinearScale,
+  PointElement,
+  LineElement,
+  Filler,
+} from "chart.js";
+import api from "../helpers/api";
 
 // Register the necessary Chart.js components
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, RadialLinearScale,
-    PointElement,
-    LineElement,
-    Filler,);
+  PointElement,
+  LineElement,
+  Filler,);
 
 const PlayerDetails = () => {
   const { id } = useParams();
@@ -23,9 +26,8 @@ const PlayerDetails = () => {
     const fetchPlayer = async () => {
       try {
         setLoading(true); // Set loading to true when API call starts
-        const response = await fetch(`http://localhost:8000/api/v1/players/${id}`);
-        const data = await response.json();
-        setPlayer(data.player); // Assuming API response contains a "player" object
+        const response = await api.get(`/players/${id}`);
+        setPlayer(response.data.player); // Assuming API response contains a "player" object
       } catch (error) {
         console.error("Error fetching player details:", error);
       } finally {
@@ -136,9 +138,9 @@ const PlayerDetails = () => {
           </div>
 
           {/* Player Stats Graph */}
-        <div className="w-100 mt-10">
-          <Radar data={data} options={options} />
-        </div>
+          <div className="w-100 mt-10">
+            <Radar data={data} options={options} />
+          </div>
         </div>
 
         {/* Player Stats Section */}
@@ -168,10 +170,10 @@ const PlayerDetails = () => {
           </div>
         </div>
         <p className="text-sm text-gray-500 italic mt-2 text-center w-full">
-  **Stats include performances from both tournament and friendly matches**
-</p>
+          **Stats include performances from both tournament and friendly matches**
+        </p>
 
-        
+
 
         {/* Player Achievements */}
         {player.achievements?.length > 0 && (

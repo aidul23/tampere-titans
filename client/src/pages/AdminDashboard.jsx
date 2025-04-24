@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { FaTrash, FaEdit, FaSignOutAlt } from "react-icons/fa";
+import api from "../helpers/api";
 
 function AdminDashboard() {
   const [players, setPlayers] = useState([]);
@@ -30,7 +31,7 @@ function AdminDashboard() {
   const fetchPlayers = async () => {
     setLoading(true);
     try {
-      const response = await axios.get("http://localhost:8000/api/v1/players");
+      const response = await api.get("/players");
       setPlayers(response.data);
     } catch (err) {
       setError("Failed to fetch players");
@@ -40,7 +41,7 @@ function AdminDashboard() {
 
   const fetchAchievements = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/v1/achievement/achievements");
+      const response = await api.get("/achievement/achievements");
       setAchievements(response.data);
     } catch (err) {
       setError("Failed to fetch achievements");
@@ -49,7 +50,7 @@ function AdminDashboard() {
 
   const fetchActivities = async () => {
     try {
-      const response = await axios.get("http://localhost:8000/api/v1/activity/activities");
+      const response = await api.get("/activity/activities");
       setActivities(response.data);
     } catch (err) {
       setError("Failed to fetch activities");
@@ -58,7 +59,7 @@ function AdminDashboard() {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get(`http://localhost:8000/api/v1/event/events`);
+      const response = await api.get(`/event/events`);
       setEvents(response.data);
     } catch (err) {
       setError("Failed to fetch activities");
@@ -69,7 +70,7 @@ function AdminDashboard() {
   const deleteActivity = async (activityId) => {
     if (!window.confirm("Are you sure you want to delete this activity?")) return;
     try {
-      await axios.delete(`http://localhost:8000/api/v1/activity/activities/${activityId}`);
+      await api.delete(`/activity/activities/${activityId}`);
       fetchActivities();
     } catch (err) {
       setError("Failed to delete activity");
@@ -80,7 +81,7 @@ function AdminDashboard() {
   const deleteAchievement = async (achievementId) => {
     if (!window.confirm("Are you sure you want to delete this achievement?")) return;
     try {
-      await axios.delete(`http://localhost:8000/api/v1/achievement/achievements/${achievementId}`);
+      await api.delete(`/achievement/achievements/${achievementId}`);
       fetchAchievements();
     } catch (err) {
       setError("Failed to delete achievement");
@@ -89,7 +90,7 @@ function AdminDashboard() {
 
   const approvePlayer = async (playerId) => {
     try {
-      await axios.put(`http://localhost:8000/api/v1/players/${playerId}/approve`);
+      await api.put(`/players/${playerId}/approve`);
       fetchPlayers();
     } catch (err) {
       setError("Failed to approve player");
@@ -99,7 +100,7 @@ function AdminDashboard() {
   const deletePlayer = async (playerId) => {
     if (!window.confirm("Are you sure you want to delete this player?")) return;
     try {
-      await axios.delete(`http://localhost:8000/api/v1/players/${playerId}`);
+      await api.delete(`/players/${playerId}`);
       fetchPlayers();
     } catch (err) {
       setError("Failed to delete player");
@@ -117,7 +118,7 @@ function AdminDashboard() {
   const handleEditSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/api/v1/players/${editPlayer._id}`, editPlayer);
+      await api.put(`/players/${editPlayer._id}`, editPlayer);
       setEditPlayer(null);
       fetchPlayers();
     } catch (err) {
@@ -129,7 +130,7 @@ function AdminDashboard() {
   const toggleCaptain = async () => {
     try {
       const updatedPlayer = { ...editPlayer, isCaptain: !editPlayer.isCaptain };
-      await axios.put(`http://localhost:8000/api/v1/players/${editPlayer._id}`, updatedPlayer);
+      await api.put(`/players/${editPlayer._id}`, updatedPlayer);
       setEditPlayer(updatedPlayer);
       fetchPlayers();
     } catch (err) {
@@ -149,7 +150,7 @@ function AdminDashboard() {
   const handleActivitySubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/api/v1/activity/activities/${editActivity._id}`, editActivity);
+      await api.put(`/activity/activities/${editActivity._id}`, editActivity);
       setEditActivity(null);
       fetchActivities();
     } catch (err) {
@@ -169,7 +170,7 @@ function AdminDashboard() {
   const handleAchievementSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:8000/api/v1/achievement/achievements/${editAchievement._id}`, editAchievement);
+      await api.put(`/achievement/achievements/${editAchievement._id}`, editAchievement);
       setEditAchievement(null);
       fetchAchievements();
     } catch (err) {

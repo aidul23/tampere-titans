@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify"; // Import toastify
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import api from "../helpers/api";
 
 const PostActivity = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -35,7 +36,7 @@ const PostActivity = () => {
 
     try {
       setUploading(true);
-      const response = await axios.post("http://localhost:8000/api/v1/activity/post", formData, {
+      const response = await api.post("/activity/post", formData, {
         headers: {
           "Content-Type": "multipart/form-data", // This tells the server that we are sending form data with a file
         },

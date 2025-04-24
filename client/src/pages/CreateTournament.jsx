@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import api from "../helpers/api";
 
 const CreateTournament = () => {
     const [formData, setFormData] = useState({

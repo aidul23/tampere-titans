@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify"; // Import toastify
 import "react-toastify/dist/ReactToastify.css"; // Import toast styles
+import api from "../helpers/api";
 
 const JoinUs = () => {
   const [formData, setFormData] = useState({
@@ -60,7 +61,7 @@ const JoinUs = () => {
 
     try {
       // Send form data to the backend via a POST request
-      const response = await axios.post("http://localhost:8000/api/v1/players/register", form, {
+      const response = await api.post("/players/register", form, {
         headers: {
           "Content-Type": "multipart/form-data", // This tells the server that we are sending form data with a file
         },

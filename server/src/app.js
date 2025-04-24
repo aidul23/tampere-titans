@@ -21,7 +21,7 @@ const ADMIN_CREDENTIALS = {
   password: process.env.ADMIN_PASS,
 };
 
-app.post("/login", (req, res) => {
+app.post("/api/v1/login", (req, res) => {
   const { email, password } = req.body;
 
   if (email === ADMIN_CREDENTIALS.email && password === ADMIN_CREDENTIALS.password) {

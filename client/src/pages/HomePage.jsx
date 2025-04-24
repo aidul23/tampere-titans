@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import Countdown from 'react-countdown';
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import api from "../helpers/api";
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ const HomePage = () => {
   useEffect(() => {
     const fetchAchievements = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/v1/achievement/achievements");
+        const response = await api.get("/achievement/achievements");
         setAchievements(response.data);
       } catch (error) {
         console.error("Error fetching achievements:", error);
@@ -24,7 +25,7 @@ const HomePage = () => {
 
     const fetchEvents = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/api/v1/event/events");
+        const response = await api.get("/event/events");
         setEvents(response.data);
       } catch (error) {
         console.error("Error fetching events:", error);

@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import api from "../helpers/api";
 
 function AdminLogin() {
     const [email, setEmail] = useState("");
@@ -12,7 +13,7 @@ function AdminLogin() {
         setError("");
 
         try {
-            const response = await fetch("http://localhost:8000/login", {
+            const response = await api.post("/login", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

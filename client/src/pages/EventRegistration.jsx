@@ -7,6 +7,7 @@ import { useLocation } from "react-router-dom";
 import Countdown from 'react-countdown';
 import { FaClipboard, FaClipboardCheck } from 'react-icons/fa';
 import { VscCopy } from "react-icons/vsc";
+import api from "../helpers/api";
 
 const EventRegistration = () => {
     const location = useLocation();
@@ -63,7 +64,7 @@ const EventRegistration = () => {
 
         try {
             setLoading(true);
-            const response = await axios.post(`http://localhost:8000/api/v1/event/${event._id}/register-team`, form, {
+            const response = await api.post(`/event/${event._id}/register-team`, form, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
