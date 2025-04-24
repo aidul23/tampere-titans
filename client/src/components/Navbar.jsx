@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react"; // Import icons
-import logo from "/assets/team_logo.png"; // Replace with actual logo
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -27,7 +26,7 @@ const Navbar = () => {
         
         {/* Team Logo */}
         <Link to="/">
-          <img src={logo} alt="Tampere Titans" className="h-12 w-auto" />
+          <img src="/assets/team_logo.png" alt="Tampere Titans" className="h-12 w-auto" />
         </Link>
 
         {/* Desktop Menu */}
