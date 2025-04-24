@@ -12,32 +12,32 @@ const tournamentData = {
             {
                 id: 0,
                 name: "Sylhet Stallions",
-                image: "/src/assets/sylhet.jpg"
+                image: "/assets/sylhet.jpg"
             },
             {
                 id: 1,
                 name: "Khulna Knights",
-                image: "/src/assets/khulna.jpg"
+                image: "/assets/khulna.jpg"
             },
             {
                 id: 2,
                 name: "Rajshahi Renegades",
-                image: "/src/assets/rajshahi.jpg"
+                image: "/assets/rajshahi.jpg"
             },
             {
                 id: 3,
                 name: "Chattogram Cobras",
-                image: "/src/assets/chattogram.jpg"
+                image: "/assets/chattogram.jpg"
             },
             {
                 id: 4,
                 name: "Barishal Blasters",
-                image: "/src/assets/barisal.jpg"
+                image: "/assets/barisal.jpg"
             },
             {
                 id: 5,
                 name: "Dhaka Dragons",
-                image: "/src/assets/dhaka.jpg"
+                image: "/assets/dhaka.jpg"
             }
         ],
         image: "/assets/tfm.png",

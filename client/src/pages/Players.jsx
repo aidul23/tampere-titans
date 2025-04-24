@@ -94,7 +94,7 @@ const PlayerCard = ({ player }) => {
             {/* Display Captain Band Image */}
             {player.isCaptain && (
               <img
-                src="src/assets/captain-band.png"
+                src="/assets/captain-band.png"
                 alt="captain badge"
                 className="w-6 h-6 object-cover"
               />
