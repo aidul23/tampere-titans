@@ -82,7 +82,7 @@ const EventRegistration = () => {
 
         try {
             setLoading(true);
-            const response = await api.post(`/event/${event.id}/register-team`, form, {
+            const response = await api.post(`/event/${event._id}/register-team`, form, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
