@@ -1,19 +1,37 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import cities from "../../fi.json"
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import Countdown from 'react-countdown';
 import { FaClipboard, FaClipboardCheck } from 'react-icons/fa';
 import { VscCopy } from "react-icons/vsc";
 import api from "../helpers/api";
 
 const EventRegistration = () => {
+    const { id } = useParams();
     const location = useLocation();
-    const event = location.state?.event;
+    const [event, setEvent] = useState();
 
     const [copiedField, setCopiedField] = useState(null);
+
+    useEffect(() => {
+        if (!event) {
+            // Fetch the event from the backend if not passed in state
+            const fetchEvent = async () => {
+                try {
+                    const response = await api.get(`/event/events/${id}`);
+                    setEvent(response.data.data); // assuming response.data is the event object
+                    console.log(response.data);
+
+                } catch (error) {
+                    console.error("Failed to fetch event:", error);
+                }
+            };
+            fetchEvent();
+        }
+    }, [id]);
 
     const handleCopy = (text, field) => {
         navigator.clipboard.writeText(text).then(() => {
@@ -64,7 +82,7 @@ const EventRegistration = () => {
 
         try {
             setLoading(true);
-            const response = await api.post(`/event/${event._id}/register-team`, form, {
+            const response = await api.post(`/event/${event.id}/register-team`, form, {
                 headers: {
                     "Content-Type": "multipart/form-data",
                 },
@@ -92,88 +110,88 @@ const EventRegistration = () => {
         <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-primary text-light p-6 pt-24">
             {/* Left Side */}
             <div className="w-full md:w-1/2 flex flex-col items-center justify-center p-8 text-center">
-
-                <img
-                    src="/assets/team_logo.png"
-                    alt="Event Registration"
-                    className="w-60 max-w-md mb-6"
-                />
-                <div className="flex justify-center mb-4">
-                    <div className="bg-secondary px-6 py-4 rounded-xl text-center shadow-lg w-full">
-                        <Countdown
-                            date={new Date(event.registrationDeadline).getTime()}
-                            renderer={({ days, hours, minutes, seconds, completed }) => {
-                                const eventDate = new Date(event.date);
-                                const now = new Date();
-
-                                if (completed) {
-                                    const isSameDay = eventDate.toDateString() === now.toDateString();
-
-                                    return (
-                                        <div className="bg-green-500 text-white text-sm px-4 py-2 rounded-full shadow-md inline-block">
-                                            {isSameDay ? "Event is Happening Today!" : "Registration Closed"}
-                                        </div>
-                                    );
-                                }
-
-                                return (
-                                    <div>
-                                        <p className="text-gray-800 text-sm mb-1 font-semibold uppercase tracking-wide">Registration Ends In</p>
-                                        <div className="text-2xl font-bold text-primary">
-                                            {days}d : {hours}h : {minutes}m : {seconds}s
-                                        </div>
-                                    </div>
-                                );
-                            }}
-                        />
-                    </div>
-                </div>
-                <h2 className="text-4xl font-bold text-white mb-4">{event.title}</h2>
-                <p className="text-lg text-gray-200">
-                    Register your team! Submit your team details and secure your spot in the tournament.
-                </p>
-
-                {/* Contact Section */}
-                <div className="mt-10 text-center text-sm text-gray-200">
-                    <p className="mb-4 italic text-gray-500">*If you face any issue during & after registration, feel free to contact*</p>
-
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                        {/* Aqib Card */}
-                        <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20 shadow-md text-white flex flex-col items-center">
-                            <img
-                                src="/assets/sium.jpg"
-                                alt="Aqib Hassan"
-                                className="w-20 h-20 object-cover rounded-full border-2 border-white mb-3"
-                            />
-                            <p className="text-lg font-semibold">Aqib Hassan</p>
-                            <p className="text-sm">General Secretary – Tampere Titans</p>
-                            <a
-                                href="tel:+358468492300"
-                                className="text-blue-400 underline mt-2"
-                            >
-                                +358 46 849 2300
-                            </a>
+                {event ? (
+                    <>
+                        <img src="/assets/team_logo.png" alt="Event Registration" className="w-60 max-w-md mb-6" />
+                        <div className="flex justify-center mb-4">
+                            <div className="bg-secondary px-6 py-4 rounded-xl text-center shadow-lg w-full">
+                                <Countdown
+                                    date={new Date(event.registrationDeadline).getTime()}
+                                    renderer={({ days, hours, minutes, seconds, completed }) => {
+                                        const eventDate = new Date(event.date);
+                                        const now = new Date();
+                                        if (completed) {
+                                            const isSameDay = eventDate.toDateString() === now.toDateString();
+                                            return (
+                                                <div className="bg-green-500 text-white text-sm px-4 py-2 rounded-full shadow-md inline-block">
+                                                    {isSameDay ? "Event is Happening Today!" : "Registration Closed"}
+                                                </div>
+                                            );
+                                        }
+                                        return (
+                                            <div>
+                                                <p className="text-gray-800 text-sm mb-1 font-semibold uppercase tracking-wide">Registration Ends In</p>
+                                                <div className="text-2xl font-bold text-primary">
+                                                    {days}d : {hours}h : {minutes}m : {seconds}s
+                                                </div>
+                                            </div>
+                                        );
+                                    }}
+                                />
+                            </div>
                         </div>
+                        <h2 className="text-4xl font-bold text-white mb-4">{event.title}</h2>
+                        <p className="text-lg text-gray-200">
+                            Register your team! Submit your team details and secure your spot in the tournament.
+                        </p>
+                        {/* Contact section... */}
+                        <div className="mt-10 text-center text-sm text-gray-200">
+                            <p className="mb-4 italic text-gray-500">*If you face any issue during & after registration, feel free to contact*</p>
 
-                        {/* Asif Card */}
-                        <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20 shadow-md text-white flex flex-col items-center">
-                            <img
-                                src="/assets/asif.jpg"
-                                alt="Asif Ahmed"
-                                className="w-20 h-20 object-cover rounded-full border-2 border-white mb-3"
-                            />
-                            <p className="text-lg font-semibold">Asif Ahmed</p>
-                            <p className="text-sm">Financial Director – Tampere Titans</p>
-                            <a
-                                href="tel:+358417234131"
-                                className="text-blue-400 underline mt-2"
-                            >
-                                +358 41 723 4131
-                            </a>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                {/* Aqib Card */}
+                                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20 shadow-md text-white flex flex-col items-center">
+                                    <img
+                                        src="/assets/sium.jpg"
+                                        alt="Hasan Aqib"
+                                        className="w-20 h-20 object-cover rounded-full border-2 border-white mb-3"
+                                    />
+                                    <p className="text-lg font-semibold">Hassan Aqib</p>
+                                    <p className="text-sm">General Secretary – Tampere Titans</p>
+                                    <a
+                                        href="tel:+358468492300"
+                                        className="text-blue-400 underline mt-2"
+                                    >
+                                        +358 46 849 2300
+                                    </a>
+                                </div>
+
+                                {/* Asif Card */}
+                                <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20 shadow-md text-white flex flex-col items-center">
+                                    <img
+                                        src="/assets/asif.jpg"
+                                        alt="Asif Ahmed"
+                                        className="w-20 h-20 object-cover rounded-full border-2 border-white mb-3"
+                                    />
+                                    <p className="text-lg font-semibold">Asif Ahmed</p>
+                                    <p className="text-sm">Financial Director – Tampere Titans</p>
+                                    <a
+                                        href="tel:+358417234131"
+                                        className="text-blue-400 underline mt-2"
+                                    >
+                                        +358 41 723 4131
+                                    </a>
+                                </div>
+                            </div>
                         </div>
+                    </>
+                ) : (
+                    <div className="text-center text-white text-xl">
+                        Loading event details...
                     </div>
-                </div>
+                )}
             </div>
+
 
 
             {/* Right Side: Form */}
@@ -270,42 +288,58 @@ const EventRegistration = () => {
                     </div>
 
                     {/* Payment Info */}
-                    <div className="space-y-4">
-                        <div className="bg-gray-100 p-4 rounded-xl border border-gray-300">
-                            <p
-                                className="text-sm text-gray-700 cursor-pointer flex items-center justify-between"
-                                onClick={() => handleCopy("+358 41 723 6446", "mobile")}
+                    <div className="space-y-6">
+                        {/* Payment Info Block */}
+                        <div className="bg-gray-100 p-4 rounded-xl border border-gray-300 space-y-4">
+                            {/* MobilePay */}
+                            <div
+                                className="text-sm text-gray-700 cursor-pointer flex justify-between items-start"
+                                onClick={() => handleCopy("+358 41 723 4131", "mobile")}
                             >
-                                <span>
-                                    <span className="font-semibold">📱 MobilePay:</span> +358 41 723 6446
-                                </span>
-                                <span className="text-xs text-gray-500 ml-2">
+                                <div>
+                                    <div>
+                                        <span className="font-semibold">📱 MobilePay:</span> +358 41 723 4131
+                                    </div>
+                                </div>
+                                <div className="text-gray-500 mt-0.5">
                                     {copiedField === "mobile" ? (
                                         <FaClipboardCheck size={16} />
                                     ) : (
                                         <VscCopy size={16} />
                                     )}
-                                </span>
-                            </p>
+                                </div>
+                            </div>
 
-                            <p
-                                className="text-sm text-gray-700 mt-2 cursor-pointer flex items-center justify-between"
-                                onClick={() => handleCopy("FI00 1234 5600 0007 85", "iban")}
+                            {/* IBAN and Account Name */}
+                            <div
+                                className="text-sm text-gray-700 cursor-pointer flex justify-between items-start"
+                                onClick={() => handleCopy("FI20 3939 0067 7378 74", "iban")}
                             >
-                                <span>
-                                    <span className="font-semibold">🏦 Bank IBAN:</span> FI00 1234 5600 0007 85
-                                </span>
-                                <span className="text-xs text-gray-500 ml-2">
+                                <div className="space-y-1">
+                                    <div>
+                                        <span className="font-semibold">🏦 Bank IBAN:</span> FI20 3939 0067 7378 74
+                                    </div>
+                                    <div>
+                                        <span className="font-semibold">👤 Payment Receiver:</span> Asif Ahmed Howlader
+                                    </div>
+                                    <div>
+                                        <p className="text-xs text-gray-500 mt-2 italic">
+                                            *Please mention <span className="text-black">Finn Bangla Football Registration</span> and <span className="text-black">Team Name</span> in payment message*
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="text-gray-500 mt-0.5">
                                     {copiedField === "iban" ? (
                                         <FaClipboardCheck size={16} />
                                     ) : (
                                         <VscCopy size={16} />
                                     )}
-                                </span>
-                            </p>
+                                </div>
+                            </div>
                         </div>
 
-                        {/* Transaction ID */}
+                        {/* Transaction ID Input */}
                         <div className="relative">
                             <input
                                 type="text"
@@ -320,10 +354,11 @@ const EventRegistration = () => {
                                 Transaction ID
                             </label>
                             <p className="text-xs text-gray-500 mt-1 italic">
-                                *Give payment transaction id or code.
+                                *Give payment transaction ID or code.
                             </p>
                         </div>
                     </div>
+
 
                     {/* Paid Checkbox */}
                     <div className="flex items-center space-x-3">

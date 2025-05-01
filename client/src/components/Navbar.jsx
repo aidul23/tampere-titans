@@ -39,7 +39,7 @@ const Navbar = () => {
         </div>
 
         {/* Mobile Menu Button */}
-        <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
+        <button className="md:hidden text-secondary" onClick={() => setIsOpen(!isOpen)}>
           {isOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
 
@@ -51,12 +51,13 @@ const Navbar = () => {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -20 }}
-          className="md:hidden bg-primary text-white py-4 space-y-4"
+          className="md:hidden bg-primary text-white py-4 space-y-4 p-4"
         >
           <NavLink to="/" onClick={() => setIsOpen(false)}>Home</NavLink>
           <NavLink to="/about" onClick={() => setIsOpen(false)}>About</NavLink>
           <NavLink to="/players" onClick={() => setIsOpen(false)}>Players</NavLink>
-          <NavLink to="/matches" onClick={() => setIsOpen(false)}>Matches</NavLink>
+          <NavLink to="/tournaments" onClick={() => setIsOpen(false)}>Tournaments</NavLink>
+          <NavLink to="/activities" onClick={() => setIsOpen(false)}>Activities</NavLink>
         </motion.div>
       )}
     </nav>

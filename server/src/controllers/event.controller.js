@@ -43,6 +43,20 @@ const postEvent = asyncHandler(async (req, res) => {
   return res.status(201).json(new ApiResponse(200, event, "Event Posted!"));
 });
 
+const getSingleEvent = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+
+  const event = await Event.findById(id);
+  if (!event) {
+    throw new ApiError(404, "Event not found");
+  }
+
+  return res.status(200).json(
+    new ApiResponse(200, event, "Event fetched successfully")
+  );
+});
+
+
 const getAllEvents = asyncHandler(async (req, res) => {
   try {
     const events = await Event.find(); // Fetch all activities
@@ -239,4 +253,4 @@ const deleteRegisteredTeam = asyncHandler(async (req, res) => {
 
 
 
-module.exports = { postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam, deleteRegisteredTeam }
+module.exports = { postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam, deleteRegisteredTeam, getSingleEvent }

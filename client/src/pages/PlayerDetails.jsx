@@ -86,24 +86,25 @@ const PlayerDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-primary text-white flex flex-col items-center justify-center p-20">
-      <div className="max-w-4xl bg-white text-black p-8 rounded-xl shadow-xl flex flex-col items-center">
+    <div className="min-h-screen bg-primary text-white flex flex-col items-center justify-center p-6 sm:p-20">
+      <div className="w-full max-w-4xl bg-white text-black p-6 m-14 sm:p-8 rounded-xl shadow-xl flex flex-col items-center">
+
         {/* Image & Details Side by Side */}
-        <div className="flex items-center gap-x-8 w-full">
+        <div className="flex flex-col sm:flex-row items-center gap-8 w-full">
+
           {/* Player Image */}
           <div className="relative">
             <img
               src={player.image}
               alt={player.name}
-              className="w-60 h-full object-cover rounded-lg shadow-lg"
+              className="w-48 sm:w-60 h-auto object-cover rounded-lg shadow-lg"
             />
           </div>
 
           {/* Player Info */}
-          <div className="flex flex-col justify-center">
-            {/* Captain Badge (if applicable) */}
+          <div className="flex flex-col items-center sm:items-start justify-center text-center sm:text-left">
             {player.isCaptain && (
-              <div className="bg-primary text-white px-3 py-2 rounded-full text-sm font-bold flex items-center space-x-1 self-start">
+              <div className="bg-primary text-white px-3 py-2 rounded-full text-sm font-bold flex items-center space-x-1 self-center sm:self-start">
                 <img
                   src="/assets/captain-band.png"
                   alt="Captain Band"
@@ -113,11 +114,9 @@ const PlayerDetails = () => {
               </div>
             )}
 
-            {/* Player Name */}
-            <h2 className="text-4xl font-bold mt-2">{player.name}</h2>
+            <h2 className="text-3xl sm:text-4xl font-bold mt-2">{player.name}</h2>
 
-            {/* Position & Jersey Number */}
-            <div className="flex flex-col mt-2 space-y-2">
+            <div className="flex flex-col mt-4 space-y-2">
               <div className="text-primary flex items-center space-x-2">
                 <img
                   src="/assets/football-boots.png"
@@ -138,50 +137,70 @@ const PlayerDetails = () => {
           </div>
 
           {/* Player Stats Graph */}
-          <div className="w-100 mt-10">
+          <div className="w-full sm:w-80 mt-8 sm:mt-0">
             <Radar data={data} options={options} />
           </div>
         </div>
 
         {/* Player Stats Section */}
-        <div className="w-full grid grid-cols-3 gap-6 mt-8">
+        <div className="w-full grid grid-cols-1 sm:grid-cols-3 gap-6 mt-8">
+          {/* Goals */}
           <div className="text-primary p-6 rounded-xl shadow-md flex flex-col items-center relative">
-            {/* Background Icon */}
-            <div className="absolute left-0 top-10 bottom-0 p-6 bg-cover bg-no-repeat opacity-30" style={{ backgroundImage: "url('/assets/goal.png')", backgroundPosition: "left center", backgroundSize: "50px 50px" }}></div>
-            {/* Content */}
+            <div
+              className="absolute left-0 top-10 p-6 bg-cover bg-no-repeat opacity-30"
+              style={{
+                backgroundImage: "url('/assets/goal.png')",
+                backgroundPosition: "left center",
+                backgroundSize: "50px 50px",
+              }}
+            />
             <h3 className="text-2xl font-bold mb-2">Goals</h3>
             <p className="text-3xl font-bold text-yellow-500">{player.stats.goals}</p>
           </div>
 
+          {/* Assists */}
           <div className="text-primary p-6 rounded-xl shadow-md flex flex-col items-center relative">
-            {/* Background Icon */}
-            <div className="absolute left-0 top-10 bottom-0 p-6 bg-cover bg-no-repeat opacity-30" style={{ backgroundImage: "url('/assets/passing.png')", backgroundPosition: "left center", backgroundSize: "50px 50px" }}></div>
-            {/* Content */}
+            <div
+              className="absolute left-0 top-10 p-6 bg-cover bg-no-repeat opacity-30"
+              style={{
+                backgroundImage: "url('/assets/passing.png')",
+                backgroundPosition: "left center",
+                backgroundSize: "50px 50px",
+              }}
+            />
             <h3 className="text-2xl font-bold mb-2">Assists</h3>
             <p className="text-3xl font-bold text-yellow-500">{player.stats.assists}</p>
           </div>
 
+          {/* Matches Played */}
           <div className="text-primary p-6 rounded-xl shadow-md flex flex-col items-center relative">
-            {/* Background Icon */}
-            <div className="absolute left-0 top-10 m-2 bottom-0 p-8 bg-cover bg-no-repeat opacity-30" style={{ backgroundImage: "url('/assets/football-court.png')", backgroundPosition: "left center", backgroundSize: "50px 50px" }}></div>
-            {/* Content */}
+            <div
+              className="absolute left-0 top-10 p-6 bg-cover bg-no-repeat opacity-30"
+              style={{
+                backgroundImage: "url('/assets/football-court.png')",
+                backgroundPosition: "left center",
+                backgroundSize: "50px 50px",
+              }}
+            />
             <h3 className="text-2xl font-bold mb-2">Matches Played</h3>
             <p className="text-3xl font-bold text-yellow-500">{player.stats.matchesPlayed}</p>
           </div>
         </div>
-        <p className="text-sm text-gray-500 italic mt-2 text-center w-full">
+
+        <p className="text-sm text-gray-500 italic mt-4 text-center w-full">
           **Stats include performances from both tournament and friendly matches**
         </p>
-
-
 
         {/* Player Achievements */}
         {player.achievements?.length > 0 && (
           <div className="w-full mt-10">
             <h2 className="text-2xl font-bold mb-4 text-center text-primary">Achievements</h2>
-            <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               {player.achievements.map((achievement, index) => (
-                <div key={index} className="bg-gradient-to-br from-yellow-400 to-yellow-600 text-black p-4 rounded-xl shadow-lg flex flex-col items-center text-center">
+                <div
+                  key={index}
+                  className="bg-gradient-to-br from-yellow-400 to-yellow-600 text-black p-4 rounded-xl shadow-lg flex flex-col items-center text-center"
+                >
                   <img src="/assets/award-symbol.png" alt="Trophy" className="w-12 h-12 mb-3" />
                   <h4 className="font-bold text-lg text-primary">{achievement.title}</h4>
                   <p className="text-sm mt-1">{achievement.tournament}</p>

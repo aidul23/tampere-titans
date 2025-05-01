@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { upload } = require("../middlewares/multer.middleware");
-const {postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam, deleteRegisteredTeam} = require("../controllers/event.controller");
+const {postEvent, getAllEvents, deleteEvent, editEvent, registerTeam, getRegisteredTeams, editRegisteredTeam, deleteRegisteredTeam, getSingleEvent} = require("../controllers/event.controller");
 
 const router = Router();
 
@@ -15,6 +15,8 @@ router.route("/").post(
   );
   
 router.route("/events").get(getAllEvents);
+
+router.route("/events/:id").get(getSingleEvent);
 
 // Route to delete an activity by ID
 router.route("/events/:eventId").delete(deleteEvent);
