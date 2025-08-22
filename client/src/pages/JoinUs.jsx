@@ -185,6 +185,7 @@ const JoinUs = () => {
               <option value="Defender">Defender</option>
               <option value="Midfielder">Midfielder</option>
               <option value="Forward">Forward</option>
+              <option value="Manager">Manager</option>
             </select>
             <label className="absolute left-4 top-1.5 bg-white px-1 text-sm text-gray-500 peer-placeholder-shown:top-2 peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 transition-all">
               Preferred Position

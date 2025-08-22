@@ -117,7 +117,9 @@ const HomePage = () => {
         <h2 className="text-3xl sm:text-4xl font-bold mb-8 text-accent relative z-10">Events</h2>
         <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-7xl px-4">
           {events.map((event) => (
-            <div key={event._id} className="bg-white p-4 rounded-xl shadow-md relative mt-4">
+            <div key={event._id} className="bg-white p-4 rounded-xl shadow-md relative mt-4 cursor-pointer"
+              onClick={() => navigate(`/events/${event._id}`, { state: { event } })}
+            >
               {/* Banner image */}
               <div
                 className="absolute top-0 left-0 right-0 h-48 sm:h-60 rounded-t-xl"
@@ -173,7 +175,10 @@ const HomePage = () => {
 
                 {new Date() < new Date(event.registrationDeadline) && (
                   <button
-                    onClick={() => navigate(`/events/${event._id}/register`, { state: { event } })}
+                    onClick={(e) => {
+                      e.stopPropagation(); // 👈 prevents navigating to event details
+                      navigate(`/events/${event._id}/register`, { state: { event } });
+                    }}
                     className="mt-2 bg-secondary text-white px-4 py-2 rounded shadow hover:bg-primary transition text-sm sm:text-base"
                   >
                     Register Now

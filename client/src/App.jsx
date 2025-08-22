@@ -23,6 +23,7 @@ import CreateEvent from "./pages/CreateEvent";
 import EventRegistration from "./pages/EventRegistration";
 import EventDetails from "./pages/EventDetails";
 import ScroolToTop from "./pages/ScrollToTop";
+import EventDetailsUser from "./pages/EventDetailsUser";
 
 function App() {
   return (
@@ -56,6 +57,7 @@ function App() {
         <Route path="/event" element={<CreateEvent />} />
         <Route path="/events/:id/register" element={<EventRegistration />} />
         <Route path="/event/:id" element={<EventDetails />} />
+        <Route path="/events/:id" element={<EventDetailsUser />} />
       </Routes>
       <Footer />
       <ToastContainer

@@ -28,6 +28,16 @@ const Players = () => {
       <h1 className="text-4xl font-bold text-center mb-10 text-secondary">Titans Squad</h1>
 
       <div className="container mx-auto grid gap-12">
+        {/* Manager Section */}
+        <div>
+          <h2 className="text-3xl text-accent mb-6 text-center">Manager</h2>
+          <div className="flex flex-wrap justify-center gap-6">
+            {filterPlayersByPosition("Manager").map((player, index) => (
+              <PlayerCard key={index} player={player} />
+            ))}
+          </div>
+        </div>
+
         {/* Goalkeepers Section */}
         <div>
           <h2 className="text-3xl text-accent mb-6 text-center">Goalkeepers</h2>
